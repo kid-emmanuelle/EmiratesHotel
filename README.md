@@ -1,2 +1,2 @@
 # EstheticHub
-Une entreprise qui fait une plateforme pour l'exploration de l'ecosysteme artistique et culturel en France.
+Une entreprise qui fait une application de gestion d'hôtel et de restaurant en Java
