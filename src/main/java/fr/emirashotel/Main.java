@@ -31,10 +31,7 @@ public class Main  extends Application{
 
         window.setWidth(screenWidth * widthPercentage);
         window.setHeight(screenHeight * heightPercentage);
-
-        String currentPath = System.getProperty("user.dir");
-        System.out.println("Chemin actuel : " + currentPath);
-        Image image = new Image(String.valueOf(this.getClass().getResource("/img/img.jpg")));
+        Image image = new Image(String.valueOf(this.getClass().getResource("/img/Emirates_Hotel.png")));
         ImageView imageView = new ImageView(image);
 
         root.getChildren().add(imageView);
