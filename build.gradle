@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'org.beryx.jlink' version '2.25.0'
 }
 
@@ -24,6 +24,11 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+compileJava {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+}
+
 application {
     mainModule = 'fr.emirashotel'
     mainClass = 'fr.emirashotel.Main'
@@ -35,6 +40,9 @@ javafx {
 }
 
 dependencies {
+
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -52,6 +60,13 @@ jlink {
     }
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
+}
+
 jlinkZip {
     group = 'distribution'
 }
+
