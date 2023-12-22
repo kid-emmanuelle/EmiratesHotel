@@ -3,8 +3,11 @@ module fr.emirashotel {
     requires javafx.fxml;
     requires static lombok;
     requires org.hibernate.orm.core;
+    requires jakarta.persistence;
+    requires static java.naming;
+    requires org.jboss.logging;
+    requires jakarta.transaction;
 
 
-    opens fr.emirashotel to lombok;
     exports fr.emirashotel;
 }
