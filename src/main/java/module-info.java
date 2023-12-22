@@ -7,4 +7,6 @@ module fr.emirashotel {
 
     opens fr.emirashotel to lombok;
     exports fr.emirashotel;
+    opens fr.emirashotel.controller;
+    
 }
