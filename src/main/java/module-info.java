@@ -2,7 +2,7 @@ module fr.emirashotel {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
-    requires static java.naming;
+    requires java.sql;
 
 
     exports fr.emirashotel;
