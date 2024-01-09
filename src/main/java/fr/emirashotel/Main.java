@@ -59,10 +59,9 @@ public class Main  extends Application{
         load.setOnAction(event -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
-                Parent newroot=loader.load();
+                Parent newroot = loader.load();
                 Scene newscene = new Scene(newroot);
                 window.setScene(newscene);
-                window.setFullScreen(true);
                 window.setResizable(true);
                 window.show();
             } catch ( IOException e) {

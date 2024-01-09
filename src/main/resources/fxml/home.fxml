@@ -1,16 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.emirashotel.controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="978.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.emirashotel.controller.HomeController">
    <children>
-      <Text layoutX="191.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
+      <VBox prefHeight="578.0" prefWidth="219.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" />
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Overview">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons8_Home_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Hotel Orders">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons8-hotel-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Restaurant Orders">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons8-restaurant-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Customers">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="286.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Employees">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons8-employee-32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Settings">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons8_Slider__32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Label layoutX="294.0" layoutY="38.0" text="Restaurant Orders">
          <font>
-            <Font size="76.0" />
+            <Font size="24.0" />
          </font>
-      </Text>
+      </Label>
+      <HBox layoutX="294.0" layoutY="82.0" prefHeight="113.0" prefWidth="650.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="22000" textFill="#2a73ff">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="Total Orders" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="22000" textFill="#26bfbc">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total delivered" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="354.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="22000" textFill="#fa5f7e">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Pending Orders" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="454.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="22000" textFill="#de0000">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Orders on Hold" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="294.0" layoutY="205.0" prefHeight="42.0" prefWidth="650.0" style="-fx-background-color: #F3F3F3;">
+         <children>
+            <Label text="Customer Name">
+               <padding>
+                  <Insets left="70.0" />
+               </padding>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" text="Address">
+               <padding>
+                  <Insets left="70.0" />
+               </padding>
+            </Label>
+            <Label layoutX="97.0" layoutY="10.0" text="Order Date">
+               <padding>
+                  <Insets left="70.0" />
+               </padding>
+            </Label>
+            <Label layoutX="280.0" layoutY="23.0" text="Amount">
+               <padding>
+                  <Insets left="70.0" />
+               </padding>
+            </Label>
+            <Label layoutX="409.0" layoutY="23.0" text="Status">
+               <padding>
+                  <Insets left="70.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <VBox fx:id="pnItems" layoutX="294.0" layoutY="253.0" prefHeight="293.0" prefWidth="650.0" />
    </children>
 </AnchorPane>
