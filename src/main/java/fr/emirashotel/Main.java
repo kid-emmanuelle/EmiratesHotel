@@ -1,9 +1,20 @@
 package fr.emirashotel;
 
+import java.io.IOException;
+
+import org.hibernate.boot.beanvalidation.IntegrationException;
+
+import fr.emirashotel.controller.HomeController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -11,33 +22,58 @@ import javafx.stage.Stage;
 public class Main  extends Application{
     public static void main(String [] args) {
         launch(args);
-
-
     }
 
     @Override
     public void start(Stage window)  {
-        StackPane root = new StackPane();
-        Scene scene = new Scene(root, 300, 200);
+        AnchorPane root = new AnchorPane();
+        // Size 
+        window.setMaximized(true);
+        double width = Screen.getPrimary().getVisualBounds().getWidth();
+        double height = Screen.getPrimary().getVisualBounds().getHeight();
+        window.setWidth(width);
+        window.setHeight(height);
+
+        // Scene
+        ImageView backgroundImage = new ImageView(new Image(getClass().getResourceAsStream("/img/fond.jpg")));
+        backgroundImage.setFitWidth(width);
+        backgroundImage.setFitHeight(height);
+        root.getChildren().add(backgroundImage);
+        Scene scene = new Scene(root, width*0.95, height*0.95);
         window.setScene(scene);
 
-        window.setMaximized(true);
-        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
-
-        double widthPercentage = 0.8;
-        double heightPercentage = 0.6;
-
-        window.setWidth(screenWidth * widthPercentage);
-        window.setHeight(screenHeight * heightPercentage);
+        // Logo
         Image image = new Image(String.valueOf(this.getClass().getResource("/img/Emirates_Hotel.png")));
-        ImageView imageView = new ImageView(image);
+        ImageView logo = new ImageView(image);
+        logo.setFitWidth(image.getHeight()*1.35);
+        logo.setFitHeight(image.getHeight()*1.35);
+        logo.setLayoutX(0.39*width);
+        logo.setLayoutY(0.05*height);
 
-        root.getChildren().add(imageView);
-        System.out.println(this.getClass().getResource(""));
-
-        window.setTitle("JavaFX Full Screen Example");
+        // Buttons
+        Button load = new Button("Connexion");
+        load.setMinSize(width*0.2, height*0.1);
+        load.setLayoutX(width*0.39);
+        load.setLayoutY(height*0.55);
+        // Button click event
+        load.setOnAction(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
+                Parent newroot=loader.load();
+                Scene newscene = new Scene(newroot);
+                window.setScene(newscene);
+                window.setFullScreen(true);
+                window.setResizable(true);
+                window.show();
+            } catch ( IOException e) {
+                e.printStackTrace();
+            }
+        });
+        root.getChildren().add(load);
+        root.getChildren().add(logo);
+        window.setTitle("App");
         window.show();
     }
 
+    
 }

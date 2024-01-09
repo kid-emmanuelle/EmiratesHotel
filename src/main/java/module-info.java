@@ -6,4 +6,6 @@ module fr.emirashotel {
 
 
     exports fr.emirashotel;
+    opens fr.emirashotel.controller;
+    
 }
