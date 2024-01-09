@@ -10,7 +10,7 @@ public class Order {
 
     private Long id;
 
-    private Date payement;
+    private Date payment;
 
     private List<Booking> bookings;
 

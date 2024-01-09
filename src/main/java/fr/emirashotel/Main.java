@@ -2,20 +2,17 @@ package fr.emirashotel;
 
 import java.io.IOException;
 
-import org.hibernate.boot.beanvalidation.IntegrationException;
-
-import fr.emirashotel.controller.HomeController;
+import fr.emirashotel.model.Booking;
+import fr.emirashotel.model.Employee;
+import fr.emirashotel.model.Person;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
