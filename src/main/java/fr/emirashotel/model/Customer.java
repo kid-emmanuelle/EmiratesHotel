@@ -1,6 +1,5 @@
 package fr.emirashotel.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,15 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Data
-@Table(name = "customer")
 public class Customer extends Person{
 
-    @Column(name = "joiningdate")
     private Date joiningDate;
 
-    @OneToMany(mappedBy = "order")
     private List<Order> orders;
 
     @Builder
