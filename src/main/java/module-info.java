@@ -5,7 +5,6 @@ module fr.emirashotel {
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
     requires static java.naming;
-    requires org.jboss.logging;
     requires jakarta.transaction;
 
 
