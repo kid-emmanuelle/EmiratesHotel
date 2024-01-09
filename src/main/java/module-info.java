@@ -2,10 +2,9 @@ module fr.emirashotel {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
-    requires org.hibernate.orm.core;
+    requires static java.naming;
 
 
-    opens fr.emirashotel to lombok;
     exports fr.emirashotel;
     opens fr.emirashotel.controller;
     
