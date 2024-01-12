@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="978.0" style="-fx-background-color: #fff;" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.emirashotel.controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="978.0" style="-fx-background-color: #fff;" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.emirashotel.controller.PaneController">
    <children>
       <VBox prefHeight="578.0" prefWidth="219.0" styleClass="nav-form" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="overviewButton" alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Overview">
+            <Button fx:id="buttonOverview" alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#redirect" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Overview">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -31,7 +29,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Hotel Orders">
+            <Button fx:id="buttonHotelOrder" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#redirect" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Hotel Orders">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +44,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Restaurant Orders">
+            <Button fx:id="buttonRestaurantOrder" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#redirect" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Restaurant Orders">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -61,7 +59,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Customers">
+            <Button fx:id="buttonCustomer" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" onMouseClicked="#redirect" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Customers">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -76,7 +74,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="286.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Employees">
+            <Button fx:id="buttonEmployee" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#redirect" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Employees">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -91,7 +89,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Settings">
+            <Button fx:id="buttonSettings" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#redirect" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Settings">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -113,53 +111,5 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <HBox layoutX="294.0" layoutY="82.0" prefHeight="113.0" prefWidth="650.0" stylesheets="@../css/home.css">
-         <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="22000" textFill="#2a73ff">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="10.0" text="Total Orders" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="22000" textFill="#26bfbc">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-                  <Label text="Total delivered" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="354.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="22000" textFill="#fa5f7e">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-                  <Label text="Pending Orders" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="454.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="22000" textFill="#de0000">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-                  <Label text="Orders on Hold" />
-               </children>
-            </VBox>
-         </children>
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-      </HBox>
    </children>
 </AnchorPane>
