@@ -5,6 +5,8 @@ import lombok.*;
 import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 public class Employee extends Person{
 
     private Date contractStart;

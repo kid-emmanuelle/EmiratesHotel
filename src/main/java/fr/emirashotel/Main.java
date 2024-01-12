@@ -1,6 +1,7 @@
 package fr.emirashotel;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import fr.emirashotel.model.Booking;
 import fr.emirashotel.model.Employee;
@@ -17,7 +18,23 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main  extends Application{
+
+    public static DatabaseManager databaseManager;
     public static void main(String [] args) {
+        try {
+            databaseManager = new DatabaseManager();
+            databaseManager.create();
+
+            databaseManager.getEmployees();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.err.println("Erreur : le pilote JDBC n'a pas pu être chargé.");
+            return;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Erreur : la connexion à la base de données a échoué.");
+            return;
+        }
         launch(args);
     }
 
