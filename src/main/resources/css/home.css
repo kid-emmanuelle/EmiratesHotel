@@ -1,3 +1,33 @@
-.button:hover {
+/**************************************************
+HOME PAGE
+***************************************************/
+.nav-form {
+    -fx-background-color:linear-gradient(to bottom right, #3ceccb, #ffffff);
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.nav-btn:hover {
     -fx-background-color: #c1f3e1;
 }
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #3f3951;
+    -fx-boder-width: 0px 0px .8px 0px;
+    -fx-font-size: 13px;
+}
+
+.white-bg {
+    -fx-background-color: rgba(115, 255, 234, 0.48);
+    -fx-background-radius: 10px;
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(178, 178, 178, 0.4), 4, 0, 0, 0);
+}
+
