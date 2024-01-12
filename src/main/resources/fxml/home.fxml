@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,12 +11,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="978.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.emirashotel.controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="978.0" style="-fx-background-color: #fff;" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.emirashotel.controller.HomeController">
    <children>
-      <VBox prefHeight="578.0" prefWidth="219.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="578.0" prefWidth="219.0" styleClass="nav-form" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" />
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Overview">
+            <Button fx:id="overviewButton" alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Overview">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -30,7 +31,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Hotel Orders">
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Hotel Orders">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +46,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Restaurant Orders">
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Restaurant Orders">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -60,7 +61,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Customers">
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Customers">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -75,7 +76,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="286.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Employees">
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="286.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Employees">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,7 +91,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9;" text="Settings">
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Settings">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -112,7 +113,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <HBox layoutX="294.0" layoutY="82.0" prefHeight="113.0" prefWidth="650.0">
+      <HBox layoutX="294.0" layoutY="82.0" prefHeight="113.0" prefWidth="650.0" stylesheets="@../css/home.css">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -155,36 +156,10 @@
                </children>
             </VBox>
          </children>
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="294.0" layoutY="205.0" prefHeight="42.0" prefWidth="650.0" style="-fx-background-color: #F3F3F3;">
-         <children>
-            <Label text="Customer Name">
-               <padding>
-                  <Insets left="70.0" />
-               </padding>
-            </Label>
-            <Label layoutX="10.0" layoutY="10.0" text="Address">
-               <padding>
-                  <Insets left="70.0" />
-               </padding>
-            </Label>
-            <Label layoutX="97.0" layoutY="10.0" text="Order Date">
-               <padding>
-                  <Insets left="70.0" />
-               </padding>
-            </Label>
-            <Label layoutX="280.0" layoutY="23.0" text="Amount">
-               <padding>
-                  <Insets left="70.0" />
-               </padding>
-            </Label>
-            <Label layoutX="409.0" layoutY="23.0" text="Status">
-               <padding>
-                  <Insets left="70.0" />
-               </padding>
-            </Label>
-         </children>
-      </HBox>
-      <VBox fx:id="pnItems" layoutX="294.0" layoutY="253.0" prefHeight="293.0" prefWidth="650.0" />
    </children>
 </AnchorPane>
