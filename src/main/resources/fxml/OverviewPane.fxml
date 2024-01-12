@@ -16,7 +16,7 @@
       <VBox prefHeight="578.0" prefWidth="219.0" styleClass="nav-form" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="buttonOverview" alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Overview">
+            <Button fx:id="buttonOverview" alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#redirect" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Overview">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -31,7 +31,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="buttonHotelOrder" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Hotel Orders">
+            <Button fx:id="buttonHotelOrder" alignment="BOTTOM_LEFT" onMouseClicked="#redirect" graphicTextGap="22.0" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Hotel Orders">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +46,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="buttonRestaurantOrder" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Restaurant Orders">
+            <Button fx:id="buttonRestaurantOrder" alignment="BOTTOM_LEFT" onMouseClicked="#redirect" graphicTextGap="22.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Restaurant Orders">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -61,7 +61,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="buttonCustomer" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Customers">
+            <Button fx:id="buttonCustomer" alignment="BOTTOM_LEFT" graphicTextGap="22.0" onMouseClicked="#redirect" layoutX="10.0" layoutY="244.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Customers">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -76,7 +76,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="buttonEmployee" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="286.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Employees">
+            <Button fx:id="buttonEmployee" alignment="BOTTOM_LEFT" onMouseClicked="#redirect" graphicTextGap="22.0" layoutX="10.0" layoutY="286.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Employees">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -91,7 +91,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="buttonSettings" alignment="BOTTOM_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Settings">
+            <Button fx:id="buttonSettings" alignment="BOTTOM_LEFT" onMouseClicked="#redirect" graphicTextGap="22.0" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="282.0" styleClass="nav-btn" stylesheets="@../css/home.css" text="Settings">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
