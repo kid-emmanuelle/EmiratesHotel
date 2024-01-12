@@ -55,7 +55,7 @@ public class Main  extends Application{
         // Button click event
         load.setOnAction(event -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OverviewPane.fxml"));
                 Parent newroot = loader.load();
                 Scene newscene = new Scene(newroot);
                 window.setScene(newscene);

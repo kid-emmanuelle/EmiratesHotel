@@ -22,8 +22,13 @@ HOME PAGE
     -fx-font-size: 13px;
 }
 
-.white-bg {
+.blue-bg {
     -fx-background-color: rgba(115, 255, 234, 0.48);
+    -fx-background-radius: 10px;
+}
+
+.white-bg {
+    -fx-background-color: rgb(255, 255, 255);
     -fx-background-radius: 10px;
 }
 
