@@ -36,7 +36,7 @@ public class CustomerPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buttonCustomer.setStyle("-fx-background-color: #d1c9f5;");
+        buttonCustomer.setStyle("-fx-background-color: #c1f3e1;");
     }
 
     @FXML

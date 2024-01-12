@@ -36,7 +36,7 @@ public class SettingsPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buttonSettings.setStyle("-fx-background-color: #d1c9f5;");
+        buttonSettings.setStyle("-fx-background-color: #c1f3e1;");
     }
 
     @FXML
