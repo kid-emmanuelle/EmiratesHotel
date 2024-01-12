@@ -32,6 +32,10 @@ HOME PAGE
     -fx-background-radius: 10px;
 }
 
+.table-view-bg {
+    -fx-background-radius: 10px;
+}
+
 .shadow {
     -fx-effect: dropshadow(three-pass-box, rgba(178, 178, 178, 0.4), 4, 0, 0, 0);
 }

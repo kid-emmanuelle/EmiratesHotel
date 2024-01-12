@@ -2,7 +2,7 @@ CREATE TABLE Person(
     PersonID int PRIMARY KEY,
     name varchar(255),
     mail varchar(255),
-    dateOfBirth varchar(255),
+    dateOfBirth DATE,
     address varchar(255)
 );
 
@@ -33,7 +33,6 @@ CREATE TABLE BookingRoom(
     start DATE,
     end DATE,
     employee int,
-    price float,
     FOREIGN KEY(employee) REFERENCES Employee(PersonID)
 );
 
@@ -41,8 +40,14 @@ CREATE TABLE Room(
     RoomID int PRIMARY KEY,
     type VARCHAR(255),
     number int,
+    price float
+);
+
+CREATE TABLE ListRooms(
+    RoomID int,
     bookingID int,
-    price float,
+    PRIMARY KEY (RoomID, bookingID),
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID),
     FOREIGN KEY (bookingID) REFERENCES BookingRoom(bookingID)
 );
 
