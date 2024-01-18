@@ -2,6 +2,7 @@ package fr.emirashotel;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import fr.emirashotel.model.Booking;
 import fr.emirashotel.model.Employee;
@@ -25,7 +26,7 @@ public class Main  extends Application{
             databaseManager = new DatabaseManager();
             databaseManager.create();
 
-            databaseManager.getEmployees();
+            ArrayList<Employee> employees = databaseManager.getEmployees();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             System.err.println("Erreur : le pilote JDBC n'a pas pu être chargé.");

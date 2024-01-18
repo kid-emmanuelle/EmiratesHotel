@@ -2,24 +2,54 @@
 HOME PAGE
 ***************************************************/
 .nav-form {
-    -fx-background-color:linear-gradient(to bottom right, #3ceccb, #ffffff);
+    -fx-background-color:linear-gradient(to bottom right, #3ceccb, rgba(225, 198, 255, 0.66));
+}
+
+.nav-img {
+    -fx-background-image: url(../img/avatar.png);
+    -fx-background-radius: 50px;
+    -fx-border-color: rgba(255, 255, 255, 0.9);
 }
 
 .nav-btn {
     -fx-background-color: transparent;
     -fx-font-size: 14px;
     -fx-cursor: hand;
+    -fx-padding: 0 0 5px 45px;
 }
 
 .nav-btn:hover {
     -fx-background-color: #c1f3e1;
 }
 
-.text-field {
+.action-btn {
+    -fx-background-radius: 10px;
+    -fx-border-width: 4px;
+    -fx-cursor: hand;
+    -fx-base: #ee2211;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #6dc9bb 0%, #44b6a5 100%),
+            #8ae3d5,
+            #a7e3da,
+            radial-gradient(center 50% 50%, radius 100%, #afece2, #8deedf);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: #ffffff;
+}
+
+.action-btn:hover {
+    -fx-background-color: #c1f3e1;
+}
+
+.text-field-bg {
     -fx-background-color: transparent;
     -fx-border-color: #3f3951;
     -fx-boder-width: 0px 0px .8px 0px;
     -fx-font-size: 13px;
+    -fx-background-radius: 10px;
 }
 
 .blue-bg {
@@ -34,6 +64,10 @@ HOME PAGE
 
 .table-view-bg {
     -fx-background-radius: 10px;
+}
+
+.table-shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(178, 178, 178, 0.5), 4, 0, 0, 0);
 }
 
 .shadow {

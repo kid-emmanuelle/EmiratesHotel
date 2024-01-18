@@ -36,7 +36,7 @@ public class RestaurantOrderPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buttonRestaurantOrder.setStyle("-fx-background-color: #d1c9f5;");
+        buttonRestaurantOrder.setStyle("-fx-background-color: #c1f3e1;");
     }
 
     @FXML
