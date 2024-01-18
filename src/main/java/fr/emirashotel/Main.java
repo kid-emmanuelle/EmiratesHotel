@@ -44,8 +44,8 @@ public class Main  extends Application{
         AnchorPane root = new AnchorPane();
         // Size 
         window.setMaximized(true);
-        double width = Screen.getPrimary().getVisualBounds().getWidth();
-        double height = Screen.getPrimary().getVisualBounds().getHeight();
+        double width = 1333;
+        double height = 701;
         window.setWidth(width);
         window.setHeight(height);
 
@@ -85,8 +85,9 @@ public class Main  extends Application{
         });
         root.getChildren().add(load);
         root.getChildren().add(logo);
-        window.setTitle("App");
+        window.setTitle("Emirates Hotel");
         window.sizeToScene();
+        window.centerOnScreen();
         window.show();
     }
 
