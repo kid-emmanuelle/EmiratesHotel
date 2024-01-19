@@ -51,6 +51,7 @@ public class DatabaseManager {
                             .role(resultset.getString("role"))
                             .build()
             );
+            System.out.println(employees.get(employees.size()-1).toString());
         }
         resultset.close();
         statement.close();
