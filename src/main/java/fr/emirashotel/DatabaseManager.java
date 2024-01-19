@@ -3,11 +3,6 @@ package fr.emirashotel;
 import fr.emirashotel.model.Customer;
 import fr.emirashotel.model.Employee;
 import fr.emirashotel.model.Order;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Singular;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -15,7 +10,7 @@ public class DatabaseManager {
 
     private static Connection connection;
 
-    private static final String url = "jdbc:mysql://localhost/emiras";
+    private static final String url = "jdbc:mysql://localhost/emirates";
     private static final String user = "root";
 
     private static final String password = "";
@@ -50,6 +45,7 @@ public class DatabaseManager {
                             .role(resultset.getString("role"))
                             .build()
             );
+            System.out.println(employees.get(employees.size()-1).toString());
         }
         resultset.close();
         statement.close();
