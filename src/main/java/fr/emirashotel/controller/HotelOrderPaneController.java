@@ -36,7 +36,7 @@ public class HotelOrderPaneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        buttonHotelOrder.setStyle("-fx-background-color: #d1c9f5;");
+        buttonHotelOrder.setStyle("-fx-background-color: #c1f3e1;");
     }
 
     @FXML
