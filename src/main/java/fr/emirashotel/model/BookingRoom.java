@@ -1,23 +1,47 @@
 package fr.emirashotel.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import fr.emirashotel.DatabaseManager;
+import lombok.*;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 public class BookingRoom extends Booking{
-
-    private String description;
 
     private Date start;
 
     private Date end;
 
-    private float price;
+    private Room room;
 
-    private List<Room> rooms;
+    @Builder
+    public BookingRoom(Long id, Customer customer, Date start, Date end, Room room/*, Order order*/) {
+        super(id, customer);
+        this.start = start;
+        this.end = end;
+        this.room = room;
+//        this.order = order;
+    }
+/*
+    public ArrayList<Room> getRooms(){
+        if(this.rooms == null){
+            try {
+                this.rooms = DatabaseManager.getRooms(this);
+            }catch (SQLException e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return this.rooms;
+    }*/
+/*
+    public void addRoom(Room room){
+        getRooms().add(room);
+    }*/
 
 }

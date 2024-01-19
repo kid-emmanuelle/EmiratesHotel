@@ -3,9 +3,7 @@ package fr.emirashotel;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import fr.emirashotel.model.Booking;
 import fr.emirashotel.model.Employee;
-import fr.emirashotel.model.Person;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,13 +17,9 @@ import javafx.stage.Stage;
 
 public class Main  extends Application{
 
-    public static DatabaseManager databaseManager;
     public static void main(String [] args) {
         try {
-            databaseManager = new DatabaseManager();
-            databaseManager.create();
-
-            databaseManager.getEmployees();
+            DatabaseManager.create();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             System.err.println("Erreur : le pilote JDBC n'a pas pu être chargé.");

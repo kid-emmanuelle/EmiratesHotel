@@ -20,42 +20,11 @@ CREATE TABLE Customer(
 
 );
 
-CREATE TABLE Command(
-    OrderID int PRIMARY KEY,
-    payment DATE,
-    customer int,
-    FOREIGN KEY (customer) REFERENCES Customer(PersonID)
-);
-
-CREATE TABLE BookingRoom(
-    bookingID int PRIMARY KEY ,
-    description varchar(255),
-    start DATE,
-    end DATE,
-    employee int,
-    FOREIGN KEY(employee) REFERENCES Employee(PersonID)
-);
-
 CREATE TABLE Room(
-    RoomID int PRIMARY KEY,
-    type VARCHAR(255),
-    number int,
-    price float
-);
-
-CREATE TABLE ListRooms(
-    RoomID int,
-    bookingID int,
-    PRIMARY KEY (RoomID, bookingID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID),
-    FOREIGN KEY (bookingID) REFERENCES BookingRoom(bookingID)
-);
-
-CREATE TABLE BookingRestaurant(
-    bookingID int PRIMARY KEY,
-    employee int,
-    price float,
-    FOREIGN KEY(employee) REFERENCES Employee(PersonID)
+     RoomID int PRIMARY KEY,
+     type VARCHAR(255),
+     number int,
+     price float
 );
 
 CREATE TABLE FoodDish(
@@ -63,8 +32,24 @@ CREATE TABLE FoodDish(
     name VARCHAR(255),
     dishType VARCHAR(255),
     description VARCHAR(255),
-    price float,
-    bookingID int,
-    FOREIGN KEY (bookingID) REFERENCES BookingRestaurant(bookingID)
+    price float
+);
+
+CREATE TABLE BookingRoom(
+    bookingID int PRIMARY KEY,
+    start DATE,
+    end DATE,
+    customer int,
+    room int,
+    FOREIGN KEY(customer) REFERENCES Customer(PersonID),
+    FOREIGN KEY(room) REFERENCES Room(RoomID)
+);
+
+CREATE TABLE BookingRestaurant(
+      bookingID int PRIMARY KEY,
+      customer int,
+      dish int,
+      FOREIGN KEY(customer) REFERENCES Customer(PersonID),
+      FOREIGN KEY(dish) REFERENCES FoodDish(DishID)
 );
 

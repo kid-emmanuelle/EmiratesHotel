@@ -1,11 +1,14 @@
 package fr.emirashotel.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
 @Data
+@AllArgsConstructor
 public abstract class Booking {
 
-    private Long id;
+    private long id;
 
-
+    private Customer customer;
 
 }

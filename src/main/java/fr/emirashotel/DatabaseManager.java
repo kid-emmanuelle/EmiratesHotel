@@ -1,8 +1,6 @@
 package fr.emirashotel;
 
-import fr.emirashotel.model.Customer;
-import fr.emirashotel.model.Employee;
-import fr.emirashotel.model.Order;
+import fr.emirashotel.model.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -10,6 +8,8 @@ import lombok.Singular;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.NoSuchElementException;
 
 public class DatabaseManager {
 
@@ -33,6 +33,7 @@ public class DatabaseManager {
     }
 
     public static ArrayList<Employee> getEmployees() throws SQLException {
+        if(connection == null) return null;
         Statement statement = connection.createStatement();
         String requete = "SELECT * FROM employee JOIN person USING(personID)";
         ResultSet resultset = statement.executeQuery(requete);
@@ -57,6 +58,7 @@ public class DatabaseManager {
     }
 
     public static ArrayList<Customer> getCustomers() throws SQLException {
+        if(connection == null) return null;
         Statement statement = connection.createStatement();
         String requete = "SELECT * FROM customer JOIN person USING(personID)";
         ResultSet resultset = statement.executeQuery(requete);
@@ -79,45 +81,181 @@ public class DatabaseManager {
         return customers;
     }
 
-    public static ArrayList<Order> getOrders(Customer customer) throws SQLException{
-        String requete = "SELECT * FROM command WHERE customer = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(requete);
-        preparedStatement.setLong(1, customer.getId());
-
-        ResultSet resultset = preparedStatement.executeQuery(requete);
-        ArrayList<Order> orders = new ArrayList<>();
-
-        while (resultset.next()){
-            orders.add(Order.builder()
-                    .id(resultset.getLong("OrderID"))
-                    .payment(resultset.getDate("payment"))
-                    .customer(customer).build());
-        }
-
-        resultset.close();
-        preparedStatement.close();
-        return orders;
-    }
-
-    public static ArrayList<Order> get(Customer customer) throws SQLException{
-        String requete = "SELECT * FROM command WHERE customer = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(requete);
-        preparedStatement.setLong(1, customer.getId());
-
-        ResultSet resultset = preparedStatement.executeQuery(requete);
-        ArrayList<Order> orders = new ArrayList<>();
+    public static ArrayList<Room> getRooms() throws SQLException{
+        if(connection == null) return null;
+        Statement statement = connection.createStatement();
+        String requete = "SELECT * FROM room";
+        ResultSet resultset = statement.executeQuery(requete);
+        ArrayList<Room> rooms = new ArrayList<>();
 
         while (resultset.next()){
-            orders.add(Order.builder()
-                    .id(resultset.getLong("OrderID"))
-                    .payment(resultset.getDate("payment"))
-                    .customer(customer).build());
+            RoomType roomType = RoomType.Double;
+            try {
+                roomType = RoomType.valueOf(resultset.getString("type"));
+            }catch (NoSuchElementException e){
+                System.err.println("Erreur : Impossible de trouver le type:"+resultset.getString("type"));
+            }
+            rooms.add(Room.builder()
+                    .id(resultset.getLong("RoomID"))
+                    .type(roomType)
+                    .number(resultset.getInt("number"))
+                    .price(resultset.getFloat("price"))
+                    .build()
+            );
         }
-
         resultset.close();
-        preparedStatement.close();
-        return orders;
+        statement.close();
+        return rooms;
     }
+
+    /**
+     * Récupérer liste des chambres qui sont disponible entre 2 dates
+     */
+    public static ArrayList<Room> getRooms(Date start, Date end) throws SQLException {
+        if(connection == null) return null;
+        Statement statement = connection.createStatement();
+        String requete = "SELECT * FROM room " +
+                "WHERE RoomID NOT IN ( " +
+                "SELECT RoomID FROM room R " +
+                "JOIN bookingroom ON (R.RoomID = room) " +
+                "WHERE start >= ? and start <= ? " +
+                "or end >= ? and end <= ?);";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(requete);
+
+        preparedStatement.setDate(1,new java.sql.Date(start.getTime()));
+        preparedStatement.setDate(2,new java.sql.Date(start.getTime()));
+        preparedStatement.setDate(3,new java.sql.Date(end.getTime()));
+        preparedStatement.setDate(4,new java.sql.Date(end.getTime()));
+
+        ResultSet resultset = preparedStatement.executeQuery();
+        ArrayList<Room> rooms = new ArrayList<>();
+
+        while (resultset.next()){
+            RoomType roomType = RoomType.Double;
+            try {
+                roomType = RoomType.valueOf(resultset.getString("type"));
+            }catch (NoSuchElementException e){
+                System.err.println("Erreur : Impossible de trouver le type:"+resultset.getString("type"));
+            }
+            rooms.add(Room.builder()
+                    .id(resultset.getLong("RoomID"))
+                    .type(roomType)
+                    .number(resultset.getInt("number"))
+                    .price(resultset.getFloat("price"))
+                    .build()
+            );
+        }
+        resultset.close();
+        statement.close();
+        return rooms;
+    }
+
+    public static ArrayList<FoodDish> getDishes() throws SQLException{
+        if(connection == null) return null;
+        Statement statement = connection.createStatement();
+        String requete = "SELECT * FROM fooddish";
+        ResultSet resultset = statement.executeQuery(requete);
+        ArrayList<FoodDish> dishes = new ArrayList<>();
+
+        while (resultset.next()){
+            dishes.add(FoodDish.builder()
+                    .id(resultset.getLong("DishID"))
+                    .dishType(resultset.getString("type"))
+                    .description(resultset.getString("description"))
+                    .price(resultset.getFloat("price"))
+                    .build()
+            );
+        }
+        resultset.close();
+        statement.close();
+        return dishes;
+    }
+
+    public static ArrayList<BookingRoom> bookingRooms() throws SQLException {
+        if(connection == null) return null;
+        Statement statement = connection.createStatement();
+        String requete = "SELECT * FROM bookingroom JOIN customer C On (C.PersonID = customer) JOIN person P USING (PersonID) JOIN room R ON (R.RoomID = room)";
+        ResultSet resultset = statement.executeQuery(requete);
+        ArrayList<BookingRoom> bookingRooms = new ArrayList<>();
+
+        while (resultset.next()){
+            Customer customer = Customer.builder()
+                    .id(resultset.getLong("personID"))
+                    .name(resultset.getString("name"))
+                    .mail(resultset.getString("mail"))
+                    .dateOfBirth(resultset.getDate("dateOfBirth"))
+                    .address(resultset.getString("address"))
+                    .joiningDate(resultset.getDate("joiningDate"))
+                    .build();
+
+            RoomType roomType = RoomType.Double;
+            try {
+                roomType = RoomType.valueOf(resultset.getString("type"));
+            }catch (NoSuchElementException e){
+                System.err.println("Erreur : Impossible de trouver le type:"+resultset.getString("type"));
+            }
+            Room room = Room.builder()
+                    .id(resultset.getLong("RoomID"))
+                    .type(roomType)
+                    .number(resultset.getInt("number"))
+                    .price(resultset.getFloat("price"))
+                    .build();
+
+            bookingRooms.add(BookingRoom.builder()
+                    .id(resultset.getLong("bookingID"))
+                    .start(resultset.getDate("start"))
+                    .end(resultset.getDate("end"))
+                    .customer(customer)
+                    .room(room)
+                    .build()
+            );
+        }
+        resultset.close();
+        statement.close();
+        return bookingRooms;
+    }
+
+
+    public static ArrayList<BookingRestaurant> bookingDishes() throws SQLException {
+        if(connection == null) return null;
+        Statement statement = connection.createStatement();
+        String requete = "SELECT * FROM bookingrestaurant JOIN customer C On (C.PersonID = customer) JOIN person P USING (PersonID) JOIN fooddish F ON (F.DishID = dish)";
+        ResultSet resultset = statement.executeQuery(requete);
+        ArrayList<BookingRestaurant> bookingRestaurants = new ArrayList<>();
+
+        while (resultset.next()){
+            Customer customer = Customer.builder()
+                    .id(resultset.getLong("personID"))
+                    .name(resultset.getString("name"))
+                    .mail(resultset.getString("mail"))
+                    .dateOfBirth(resultset.getDate("dateOfBirth"))
+                    .address(resultset.getString("address"))
+                    .joiningDate(resultset.getDate("joiningDate"))
+                    .build();
+
+            FoodDish dish = FoodDish.builder()
+                    .id(resultset.getLong("DishID"))
+                    .dishType(resultset.getString("type"))
+                    .description(resultset.getString("description"))
+                    .price(resultset.getFloat("price"))
+                    .build();
+
+
+            bookingRestaurants.add(BookingRestaurant.builder()
+                    .id(resultset.getLong("bookingID"))
+                    .customer(customer)
+                    .dish(dish)
+                    .build()
+            );
+        }
+        resultset.close();
+        statement.close();
+        return bookingRestaurants;
+    }
+
+    //Add
+//    public static boolean addEmployee(Employee employee){}
 
 
 }

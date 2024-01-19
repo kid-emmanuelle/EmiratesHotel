@@ -19,4 +19,12 @@ public class Employee extends Person{
         this.contractStart = contractStart;
         this.role = role;
     }
+
+    public void publish(){
+
+    }
+
+    public void delete(){
+
+    }
 }
