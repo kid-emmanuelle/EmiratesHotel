@@ -7,6 +7,7 @@ import fr.emirashotel.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -28,6 +29,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import javafx.collections.ListChangeListener;
 
 public class CustomerPaneController implements Initializable {
 
@@ -100,17 +102,20 @@ public class CustomerPaneController implements Initializable {
     @FXML
     private TableColumn<Customer, Date> customerCol_joinDate;
 
+    ObservableList<Customer> customers;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buttonCustomer.setStyle("-fx-background-color: #c1f3e1;");
         customerDOB.setConverter(getCustomStringConverter());
         customerJoinDate.setConverter(getCustomStringConverter());
         availableCustomerShowListData();
+        searchCustomer();
     }
 
     //region Customer Controller Functions
     public void availableCustomerShowListData() {
-        ObservableList<Customer> customers = FXCollections.observableArrayList();
+        customers = FXCollections.observableArrayList();
         try {
             customers.addAll(DatabaseManager.getCustomers());
         } catch (SQLException e) {
@@ -245,6 +250,14 @@ public class CustomerPaneController implements Initializable {
                 alert.setContentText("Please fill blank ID field!");
                 alert.showAndWait();
             } else {
+                if (!DatabaseManager.checkID(Long.valueOf(customerID.getText()))) {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("ID does not exist!");
+                    alert.showAndWait();
+                    return;
+                }
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation Message");
                 alert.setHeaderText(null);
@@ -266,6 +279,34 @@ public class CustomerPaneController implements Initializable {
         }
     }
 
+    public void searchCustomer() {
+        FilteredList<Customer> filter = new FilteredList<>(customers, e->true);
+
+        customerSearch.textProperty().addListener((Observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateCustomerData -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String searchKey = newValue.toLowerCase();
+                if (predicateCustomerData.getId().toString().contains(searchKey)) {
+                    return true;
+                } else if (predicateCustomerData.getName().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateCustomerData.getMail().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateCustomerData.getAddress().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateCustomerData.getJoiningDate().toString().contains(searchKey)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            ObservableList<Customer> customerFilter = FXCollections.observableArrayList();
+            customerFilter.addAll(filter);
+            customerTableView.setItems(customerFilter);
+        });
+    }
     //endregion
 
     //region Private Functions
