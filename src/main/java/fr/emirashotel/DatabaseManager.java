@@ -61,7 +61,7 @@ public class DatabaseManager {
     public static ArrayList<Customer> getCustomers() throws SQLException {
         if(connection == null) return null;
         Statement statement = connection.createStatement();
-        String requete = "SELECT * FROM customer JOIN person USING(personID)";
+        String requete = "SELECT * FROM customer JOIN person USING(personID) ORDER BY personID ASC";
         ResultSet resultset = statement.executeQuery(requete);
         ArrayList<Customer> customers = new ArrayList<>();
 
@@ -256,7 +256,87 @@ public class DatabaseManager {
     }
 
     //Add
-//    public static boolean addEmployee(Employee employee){}
+    //public static boolean addEmployee(Employee employee){}
+    public static boolean addCustomer(Customer customer) throws  SQLException {
+        if (connection != null) {
+            String addPersonquery = "INSERT INTO person (PersonID, NAME, mail, dateOfBirth, address) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement prepare = connection.prepareStatement(addPersonquery);
+            prepare.setString(1, String.valueOf(customer.getId()));
+            prepare.setString(2, customer.getName());
+            prepare.setString(3, customer.getMail());
+            prepare.setString(4, String.valueOf(customer.getDateOfBirth()));
+            prepare.setString(5, customer.getAddress());
+            prepare.executeUpdate();
 
+            String addCustomerQuery = "INSERT INTO customer (PersonID, joiningDate) VALUES (?, ?)";
+            PreparedStatement prepareCustomer = connection.prepareStatement(addCustomerQuery);
+            prepareCustomer.setString(1, String.valueOf(customer.getId()));
+            prepareCustomer.setString(2, String.valueOf(customer.getJoiningDate()));
+            prepareCustomer.executeUpdate();
+            return true;
+        }
+        return false;
+    }
 
+    //Update
+    public static boolean updateCustomer(Customer customer) throws SQLException {
+        if (connection != null) {
+            String updatePersonQuery = "UPDATE person SET " +
+                    "NAME = '" + customer.getName()
+                    + "', mail = '" + customer.getMail()
+                    + "', dateOfBirth = '" + String.valueOf(customer.getDateOfBirth())
+                    + "', address = '" + customer.getAddress()
+                    + "' WHERE PersonID = '" + String.valueOf(customer.getId()) + "'";
+            Statement preparePerson = connection.createStatement();
+            preparePerson.executeUpdate(updatePersonQuery);
+
+            String updateCustomerQuery = "UPDATE customer SET " +
+                    "joiningDate = '" + String.valueOf(customer.getJoiningDate())
+                    + "' WHERE PersonID = '" + String.valueOf(customer.getId()) + "'";
+            Statement prepareCustomer = connection.createStatement();
+            prepareCustomer.executeUpdate(updateCustomerQuery);
+            return true;
+        }
+        return false;
+    }
+
+    //Delete
+    public static boolean deleteCustomer(Customer customer) throws SQLException {
+        if (connection != null) {
+            String deletePersonQuery = "DELETE FROM person WHERE PersonID = '" + customer.getId().toString() + "'";
+            Statement preparePerson = connection.createStatement();
+            preparePerson.executeUpdate(deletePersonQuery);
+
+            String deleteCustomerQuery = "DELETE FROM customer WHERE PersonID = '" + customer.getId().toString() + "'";
+            Statement prepareCustomer = connection.createStatement();
+            prepareCustomer.executeUpdate(deleteCustomerQuery);
+            return true;
+        }
+        return false;
+    }
+
+    public static long getNumberOfRows(String table) throws SQLException {
+        long rowCount = 0;
+        if (connection != null) {
+            String query = "SELECT COUNT(*) AS row_count FROM " + table;
+            Statement prepare = connection.createStatement();
+            ResultSet resultSet = prepare.executeQuery(query);
+
+            if (resultSet.next()) {
+                rowCount = resultSet.getInt("row_count");
+            }
+        }
+        return rowCount;
+    }
+
+    public static boolean checkID(Long PersonID) throws SQLException {
+        String checkData = "SELECT PersonID FROM person WHERE PersonID = '" + PersonID.toString() + "'";
+        Statement prepare = connection.createStatement();
+        ResultSet resultSet = prepare.executeQuery(checkData);
+
+        if (resultSet.next()) {
+            return true;
+        }
+        return false;
+    }
 }
