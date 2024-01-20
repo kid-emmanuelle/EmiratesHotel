@@ -127,47 +127,106 @@
             </Button>
          </children>
       </VBox>
-      <Label layoutX="294.0" layoutY="38.0" text="Customer">
+      <Label layoutX="294.0" layoutY="38.0" text="Customer" AnchorPane.topAnchor="38.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="294.0" layoutY="88.0" prefHeight="578.0" prefWidth="302.0" stylesheets="@../css/home.css">
+      <AnchorPane layoutX="294.0" layoutY="88.0" prefHeight="578.0" prefWidth="302.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="88.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="table-shadow" />
          </styleClass>
          <children>
-            <TextField layoutX="114.0" layoutY="30.0" prefHeight="25.0" prefWidth="174.0" />
-            <Label layoutX="69.0" layoutY="34.0" text="Name:" />
-            <TextField layoutX="114.0" layoutY="70.0" prefHeight="25.0" prefWidth="174.0" />
-            <Label layoutX="58.0" layoutY="74.0" text="Address:" />
-            <DatePicker layoutX="114.0" layoutY="110.0" />
-            <Label layoutX="36.0" layoutY="114.0" text="Joining Date:" />
-            <Button layoutX="32.0" layoutY="179.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Add">
+            <Label layoutX="32.0" layoutY="20.0" text="Customer Information" textFill="#cca2fc">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="customerID" layoutX="115.0" layoutY="56.0" prefHeight="25.0" prefWidth="174.0" promptText="Don't need ID to Add" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="90.0" layoutY="60.0" text="ID:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="customerName" layoutX="114.0" layoutY="96.0" prefHeight="25.0" prefWidth="174.0" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font></TextField>
+            <Label layoutX="67.0" layoutY="100.0" text="Name:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font></Label>
+            <TextField fx:id="customerMail" layoutX="114.0" layoutY="135.0" prefHeight="25.0" prefWidth="174.0" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="77.0" layoutY="139.0" text="Mail:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="customerAddress" layoutX="114.0" layoutY="173.0" prefHeight="25.0" prefWidth="174.0" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font></TextField>
+            <Label layoutX="56.0" layoutY="177.0" text="Address:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font></Label>
+            <DatePicker fx:id="customerDOB" layoutX="114.0" layoutY="212.0" styleClass="txt-field-bg" stylesheets="@../css/home.css" />
+            <Label layoutX="29.0" layoutY="216.0" text="Date of birth:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font></Label>
+            <DatePicker fx:id="customerJoinDate" layoutX="114.0" layoutY="251.0" styleClass="txt-field-bg" stylesheets="@../css/home.css" />
+            <Label layoutX="29.0" layoutY="255.0" text="Joining Date:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="customerAddBtn" layoutX="32.0" layoutY="315.0" mnemonicParsing="false" onAction="#customerAdd" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Add">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
-               </cursor></Button>
-            <Button layoutX="167.0" layoutY="179.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Update" />
-            <Button layoutX="32.0" layoutY="252.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Clear" />
-            <Button layoutX="167.0" layoutY="252.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Delete" />
+               </cursor>
+            </Button>
+            <Button fx:id="customerUpdateBtn" layoutX="167.0" layoutY="315.0" mnemonicParsing="false" onAction="#updateCustomer" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Update" />
+            <Button fx:id="customerClearBtn" layoutX="32.0" layoutY="388.0" mnemonicParsing="false" onAction="#clearContent" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Clear" />
+            <Button fx:id="customerDeleteBtn" layoutX="167.0" layoutY="388.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Delete" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="623.0" layoutY="88.0" prefHeight="578.0" prefWidth="679.0" stylesheets="@../css/home.css">
+      <AnchorPane layoutX="626.0" layoutY="88.0" prefHeight="578.0" prefWidth="679.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="626.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="88.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="table-shadow" />
          </styleClass>
          <children>
-            <TextField layoutX="14.0" layoutY="15.0" prefHeight="35.0" prefWidth="325.0" promptText="Search" styleClass="text-field" stylesheets="@../css/home.css" />
-            <TableView layoutX="14.0" layoutY="66.0" prefHeight="500.0" prefWidth="652.0" styleClass="table-view-bg" stylesheets="@../css/home.css">
+            <TextField fx:id="customerSearch" layoutX="14.0" layoutY="15.0" prefHeight="35.0" prefWidth="325.0" promptText="Search" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="35.0" />
+               </padding></TextField>
+            <TableView fx:id="customerTableView" layoutX="14.0" layoutY="66.0" onMouseClicked="#availableCustomerSelect" prefHeight="500.0" prefWidth="652.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="66.0">
               <columns>
-                <TableColumn prefWidth="131.0" text="Name" />
-                <TableColumn prefWidth="193.0" text="Mail" />
-                  <TableColumn minWidth="0.0" prefWidth="192.0" text="Address" />
-                  <TableColumn minWidth="0.0" prefWidth="135.0" text="Joining Date" />
+                <TableColumn fx:id="customerCol_name" prefWidth="141.0" text="Name" />
+                  <TableColumn fx:id="customerCol_id" prefWidth="53.0" text="ID" />
+                <TableColumn fx:id="customerCol_mail" prefWidth="187.0" text="Mail" />
+                  <TableColumn fx:id="customerCol_address" minWidth="0.0" prefWidth="145.0" text="Address" />
+                  <TableColumn fx:id="customerCol_joinDate" minWidth="0.0" prefWidth="125.0" text="Joining Date" />
               </columns>
             </TableView>
+            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="19.0" layoutY="19.0">
+               <image>
+                  <Image url="@../img/icons8-search-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
