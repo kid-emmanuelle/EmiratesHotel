@@ -8,5 +8,6 @@ module fr.emirashotel {
 
     exports fr.emirashotel;
     opens fr.emirashotel.controller;
+    opens fr.emirashotel.model to javafx.base;
     
 }
