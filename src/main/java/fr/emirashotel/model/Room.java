@@ -15,5 +15,5 @@ public class Room {
 
     private int number;
 
-    private List<BookingRoom> rooms;
+    private float price;
 }
