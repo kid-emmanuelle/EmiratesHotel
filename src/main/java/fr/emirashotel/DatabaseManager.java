@@ -162,7 +162,8 @@ public class DatabaseManager {
         while (resultset.next()){
             dishes.add(FoodDish.builder()
                     .id(resultset.getLong("DishID"))
-                    .dishType(resultset.getString("type"))
+                    .name(resultset.getString("name"))
+                    .dishType(resultset.getString("dishType"))
                     .description(resultset.getString("description"))
                     .price(resultset.getFloat("price"))
                     .build()

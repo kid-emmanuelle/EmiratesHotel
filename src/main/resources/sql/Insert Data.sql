@@ -128,3 +128,20 @@ INSERT INTO BookingRoom (bookingID, customer, start, end, room) VALUES (9, 9, '2
 
 INSERT INTO BookingRoom (bookingID, customer, start, end, room) VALUES (10,10, '2024-10-20', '2024-10-25',10);
 
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (1, 'Salade César', 'Entrée', 'Salade verte, poulet grillé, croûtons, parmesan, sauce César', 12.99);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (2, 'Tomate Mozzarella', 'Entrée', 'Tomates, mozzarella, basilic, vinaigrette balsamique', 10.50);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (3, 'Boeuf Bourguignon', 'Plat principal', 'Boeuf mijoté, carottes, champignons, vin rouge', 18.75);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (4, 'Poulet rôti', 'Plat principal', 'Poulet rôti au four, pommes de terre, légumes grillés', 16.50);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (5, 'Assiette de fromages', 'Fromage', 'Sélection de fromages affinés avec pain et fruits secs', 14.25);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (6, 'Fondue Savoyarde', 'Fromage', 'Fondue de fromage savoyarde avec pain et pommes de terre', 20.99);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (7, 'Tiramisu', 'Dessert', 'Dessert italien à base de biscuits, café, mascarpone', 8.99);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (8, 'Crème Brûlée', 'Dessert', 'Crème vanillée avec une couche caramélisée sur le dessus', 9.75);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (9, 'Saumon fumé', 'Entrée', 'Saumon fumé, blinis, crème fraîche, citron', 15.50);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (10, 'Magret de canard', 'Plat principal', 'Magret de canard grillé, purée de patates douces, sauce aux fruits rouges', 22.50);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (11, 'Plateau de fromages variés', 'Fromage', 'Divers fromages avec accompagnements', 18.99);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (12, 'Mousse au chocolat', 'Dessert', 'Mousse légère au chocolat noir', 7.99);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (13, 'Carpaccio de boeuf', 'Entrée', 'Fines tranches de boeuf, roquette, parmesan, vinaigrette', 14.25);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (14, 'Ratatouille provençale', 'Plat principal', 'Légumes mijotés au four, huile d olive, herbes de Provence', 16.75);
+INSERT INTO FoodDish (DishID, name, dishType, description, price) VALUES (15, 'Crêpes Suzette', 'Dessert', 'Crêpes à l orange, sucre, Grand Marnier', 10.99);
+
+
