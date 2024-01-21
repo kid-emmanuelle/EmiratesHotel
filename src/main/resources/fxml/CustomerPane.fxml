@@ -213,13 +213,15 @@
                <padding>
                   <Insets left="35.0" />
                </padding></TextField>
-            <TableView fx:id="customerTableView" layoutX="14.0" layoutY="66.0" onMouseClicked="#availableCustomerSelect" prefHeight="500.0" prefWidth="652.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="66.0">
+            <TableView fx:id="customerTableView" layoutX="14.0" layoutY="66.0" onMouseClicked="#availableCustomerSelect" prefHeight="500.0" prefWidth="652.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="66.0">
               <columns>
                 <TableColumn fx:id="customerCol_name" prefWidth="141.0" text="Name" />
                   <TableColumn fx:id="customerCol_id" prefWidth="53.0" text="ID" />
                 <TableColumn fx:id="customerCol_mail" prefWidth="187.0" text="Mail" />
                   <TableColumn fx:id="customerCol_address" minWidth="0.0" prefWidth="145.0" text="Address" />
                   <TableColumn fx:id="customerCol_joinDate" minWidth="0.0" prefWidth="125.0" text="Joining Date" />
+                  <TableColumn minWidth="0.0" prefWidth="300.0" />
+                  <TableColumn minWidth="0.0" prefWidth="285.0" />
               </columns>
             </TableView>
             <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="19.0" layoutY="19.0">
