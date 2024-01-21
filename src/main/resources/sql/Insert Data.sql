@@ -81,6 +81,36 @@ INSERT INTO person(PersonID, name, mail, dateOfBirth, address) VALUES (80,'jason
 
 INSERT INTO employee(PersonID, contractStart, role) VALUES (1,'2023-05-05 12:00:00','Groom');
 INSERT INTO employee(PersonID, contractStart, role) VALUES (4,'2023-05-05 12:00:00','Groom');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (20, '2023-01-10', 'Chef');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (45, '2022-11-05', 'Waiter');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (60, '2023-02-15', 'Front Desk Clerk');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (30, '2022-10-20', 'Housekeeping');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (75, '2023-03-08', 'Bartender');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (40, '2022-12-18', 'Manager');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (55, '2022-09-25', 'Server');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (65, '2023-01-05', 'Concierge');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (50, '2022-11-15', 'Cleaning Staff');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (70, '2023-02-01', 'Security');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (25, '2022-10-10', 'Event Planner');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (35, '2022-12-05', 'Room Service');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (80, '2023-03-20', 'Bellhop');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (22, '2022-09-15', 'Receptionist');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (42, '2023-01-25', 'Kitchen Staff');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (58, '2022-10-30', 'Event Coordinator');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (33, '2023-02-10', 'Barista');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (68, '2022-11-30', 'Porter');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (28, '2023-03-15', 'Housekeeping Supervisor');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (48, '2022-09-10', 'Waitstaff Supervisor');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (78, '2022-12-23', 'Front Office Manager');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (38, '2023-01-20', 'Sous Chef');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (23, '2022-10-05', 'Valet Parking Attendant');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (53, '2022-11-20', 'Banquet Server');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (63, '2023-02-05', 'Dishwasher');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (32, '2022-09-30', 'Maintenance Staff');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (73, '2023-01-15', 'Executive Chef');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (43, '2022-10-25', 'Hotel General Manager');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (56, '2022-12-10', 'Catering Manager');
+INSERT INTO employee (PersonID, contractStart, role) VALUES (66, '2023-03-01', 'Host/Hostess');
 
 INSERT INTO customer(PersonID, joiningDate) VALUES (2, '2021-12-01 12:00:00');
 INSERT INTO customer(PersonID, joiningDate) VALUES (3, '2024-12-01 12:00:00');
@@ -99,18 +129,16 @@ INSERT INTO customer(PersonID, joiningDate) VALUES (13, '2024-12-01 12:00:00');
 INSERT INTO bookingroom(bookingID, start, end, customer, room) VALUES (1,'2024-12-08 12:00:00','2024-12-10 12:00:00',2, 1);
 INSERT INTO bookingroom(bookingID, start, end, customer, room) VALUES (2,'2024-12-11 12:00:00','2024-12-14 12:00:00',2, 1);
 
-INSERT INTO room (id, type, number, price) VALUES (1, 'Single', 101, 50.0);
-INSERT INTO room (id, type, number, price) VALUES (2, 'Double', 201, 80.0);
-INSERT INTO room (id, type, number, price) VALUES (3, 'Triple', 301, 110.0);
-INSERT INTO room (id, type, number, price) VALUES (4, 'Quad', 401, 140.0);
-INSERT INTO room (id, type, number, price) VALUES (5, 'Single', 102, 55.0);
-INSERT INTO room (id, type, number, price) VALUES (6, 'Double', 202, 85.0);
-INSERT INTO room (id, type, number, price) VALUES (7, 'Triple', 302, 115.0);
-INSERT INTO room (id, type, number, price) VALUES (8, 'Quad', 402, 145.0);
-INSERT INTO room (id, type, number, price) VALUES (9, 'Single', 103, 60.0);
-INSERT INTO room (id, type, number, price) VALUES (10, 'Double', 203, 90.0);
-
-INSERT INTO BookingRoom (bookingID, customer, start, end, room) VALUES (2, 2, '2024-02-15', '2024-02-20', 1);
+INSERT INTO room (Roomid, type, number, price) VALUES (1, 'Single', 101, 50.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (2, 'Double', 201, 80.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (3, 'Triple', 301, 110.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (4, 'Quad', 401, 140.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (5, 'Single', 102, 55.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (6, 'Double', 202, 85.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (7, 'Triple', 302, 115.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (8, 'Quad', 402, 145.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (9, 'Single', 103, 60.0);
+INSERT INTO room (Roomid, type, number, price) VALUES (10, 'Double', 203, 90.0);
 
 INSERT INTO BookingRoom (bookingID, customer, start, end, room) VALUES (3, 3, '2024-03-05', '2024-03-12', 3);
 

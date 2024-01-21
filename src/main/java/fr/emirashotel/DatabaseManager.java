@@ -35,7 +35,7 @@ public class DatabaseManager {
     public static ArrayList<Employee> getEmployees() throws SQLException {
         if(connection == null) return null;
         Statement statement = connection.createStatement();
-        String requete = "SELECT * FROM employee JOIN person USING(personID)";
+        String requete = "SELECT * FROM employee JOIN person USING(personID) ORDER BY personID ASC";
         ResultSet resultset = statement.executeQuery(requete);
         ArrayList<Employee> employees = new ArrayList<>();
 
@@ -51,7 +51,6 @@ public class DatabaseManager {
                             .role(resultset.getString("role"))
                             .build()
             );
-            System.out.println(employees.get(employees.size()-1).toString());
         }
         resultset.close();
         statement.close();
@@ -257,7 +256,28 @@ public class DatabaseManager {
     }
 
     //Add
-    //public static boolean addEmployee(Employee employee){}
+    public static boolean addEmployee(Employee employee) throws SQLException {
+        if (connection != null) {
+            String addPersonquery = "INSERT INTO person (PersonID, NAME, mail, dateOfBirth, address) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement prepare = connection.prepareStatement(addPersonquery);
+            prepare.setString(1, String.valueOf(employee.getId()));
+            prepare.setString(2, employee.getName());
+            prepare.setString(3, employee.getMail());
+            prepare.setString(4, String.valueOf(employee.getDateOfBirth()));
+            prepare.setString(5, employee.getAddress());
+            prepare.executeUpdate();
+
+            String addEmployeeQuery = "INSERT INTO employee (PersonID, contractStart, role) VALUES (?, ?, ?)";
+            PreparedStatement prepareCustomer = connection.prepareStatement(addEmployeeQuery);
+            prepareCustomer.setString(1, String.valueOf(employee.getId()));
+            prepareCustomer.setString(2, String.valueOf(employee.getContractStart()));
+            prepareCustomer.setString(3, String.valueOf(employee.getRole()));
+            prepareCustomer.executeUpdate();
+            return true;
+        }
+        return false;
+    }
+
     public static boolean addCustomer(Customer customer) throws  SQLException {
         if (connection != null) {
             String addPersonquery = "INSERT INTO person (PersonID, NAME, mail, dateOfBirth, address) VALUES (?, ?, ?, ?, ?)";
@@ -301,6 +321,28 @@ public class DatabaseManager {
         return false;
     }
 
+    public static boolean updateEmployee(Employee employee) throws SQLException {
+        if (connection != null) {
+            String updatePersonQuery = "UPDATE person SET " +
+                    "NAME = '" + employee.getName()
+                    + "', mail = '" + employee.getMail()
+                    + "', dateOfBirth = '" + String.valueOf(employee.getDateOfBirth())
+                    + "', address = '" + employee.getAddress()
+                    + "' WHERE PersonID = '" + String.valueOf(employee.getId()) + "'";
+            Statement preparePerson = connection.createStatement();
+            preparePerson.executeUpdate(updatePersonQuery);
+
+            String updateEmployeeQuery = "UPDATE employee SET " +
+                    "contractStart = '" + String.valueOf(employee.getContractStart())
+                    + "', role = '" + employee.getRole()
+                    + "' WHERE PersonID = '" + String.valueOf(employee.getId()) + "'";
+            Statement prepareCustomer = connection.createStatement();
+            prepareCustomer.executeUpdate(updateEmployeeQuery);
+            return true;
+        }
+        return false;
+    }
+
     //Delete
     public static boolean deleteCustomer(Customer customer) throws SQLException {
         if (connection != null) {
@@ -311,6 +353,20 @@ public class DatabaseManager {
             String deleteCustomerQuery = "DELETE FROM customer WHERE PersonID = '" + customer.getId().toString() + "'";
             Statement prepareCustomer = connection.createStatement();
             prepareCustomer.executeUpdate(deleteCustomerQuery);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean deleteEmployee(Employee employee) throws SQLException {
+        if (connection != null) {
+            String deletePersonQuery = "DELETE FROM person WHERE PersonID = '" + employee.getId().toString() + "'";
+            Statement preparePerson = connection.createStatement();
+            preparePerson.executeUpdate(deletePersonQuery);
+
+            String deleteEmployeeQuery = "DELETE FROM employee WHERE PersonID = '" + employee.getId().toString() + "'";
+            Statement prepareCustomer = connection.createStatement();
+            prepareCustomer.executeUpdate(deleteEmployeeQuery);
             return true;
         }
         return false;

@@ -29,6 +29,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
+
 import javafx.collections.ListChangeListener;
 
 public class CustomerPaneController implements Initializable {
@@ -109,6 +111,7 @@ public class CustomerPaneController implements Initializable {
         buttonCustomer.setStyle("-fx-background-color: #c1f3e1;");
         customerDOB.setConverter(getCustomStringConverter());
         customerJoinDate.setConverter(getCustomStringConverter());
+        customerID.setTextFormatter(textFormatter());
         availableCustomerShowListData();
         searchCustomer();
     }
@@ -146,7 +149,6 @@ public class CustomerPaneController implements Initializable {
 
     public void customerAdd() {
         try {
-            Alert alert;
             long personId;
             if (customerID.getText().isEmpty()) {
                 personId = DatabaseManager.getNumberOfRows("person") + 1;
@@ -156,11 +158,7 @@ public class CustomerPaneController implements Initializable {
             } else {
                 personId = Long.parseLong(customerID.getText());
                 if (DatabaseManager.checkID(personId)) {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("ID was already existed!");
-                    alert.showAndWait();
+                    messageNotif("Error", "ID was already existed!");
                     return;
                 }
             }
@@ -171,19 +169,11 @@ public class CustomerPaneController implements Initializable {
             LocalDate joiningDate = customerJoinDate.getValue();
             // Check if there are empty fields
             if (name.isEmpty() || email.isEmpty() || address.isEmpty() || joiningDate == null || dob == null) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill all blank fields!");
-                alert.showAndWait();
+                messageNotif("Error", "Please fill all blank fields!");
             } else {
                 Customer customer = Customer.builder().id(personId).name(name).mail(email).dateOfBirth(Date.valueOf(dob)).address(address).joiningDate(Date.valueOf(joiningDate)).build();
                 if (DatabaseManager.addCustomer(customer)) {
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully added!");
-                    alert.showAndWait();
+                    messageNotif("Information", "Successfully added!");
                     availableCustomerShowListData();
                     clearContent();
                 } else return;
@@ -210,26 +200,13 @@ public class CustomerPaneController implements Initializable {
             LocalDate dob = customerDOB.getValue();
             LocalDate joiningDate = customerJoinDate.getValue();
             // Check if there are empty fields
-            Alert alert;
             if (customerID.getText().isEmpty() || name.isEmpty() || email.isEmpty() || address.isEmpty() || joiningDate == null || dob == null) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill all blank fields!");
-                alert.showAndWait();
+                messageNotif("Error", "Please fill all blank fields!");
             } else {
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure want to UPDATE Customer " + customerID.getText() + "?");
-                alert.showAndWait();
+                messageNotif("Confirmation", "Are you sure want to UPDATE Customer " + customerID.getText() + "?");
                 Customer customerUpdate = Customer.builder().id(Long.valueOf(customerID.getText())).name(name).mail(email).dateOfBirth(Date.valueOf(dob)).address(address).joiningDate(Date.valueOf(joiningDate)).build();
                 if (DatabaseManager.updateCustomer(customerUpdate)) {
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Updated!");
-                    alert.showAndWait();
+                    messageNotif("Information", "Successfully Updated!");
                     availableCustomerShowListData();
                     clearContent();
                 } else return;
@@ -242,34 +219,17 @@ public class CustomerPaneController implements Initializable {
     public void deleteCustomer() {
         try {
             // Check if there are empty fields
-            Alert alert;
             if (customerID.getText().isEmpty()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill blank ID field!");
-                alert.showAndWait();
+                messageNotif("Error", "Please fill blank ID field!");
             } else {
                 if (!DatabaseManager.checkID(Long.valueOf(customerID.getText()))) {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("ID does not exist!");
-                    alert.showAndWait();
+                    messageNotif("Error", "ID does not exist!");
                     return;
                 }
-                alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure want to DELETE Customer " + customerID.getText() + "?");
-                alert.showAndWait();
+                messageNotif("Confirmation", "Are you sure want to DELETE Customer " + customerID.getText() + "?");
                 Customer customerDelete = Customer.builder().id(Long.valueOf(customerID.getText())).build();
                 if (DatabaseManager.deleteCustomer(customerDelete)) {
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Deleted!");
-                    alert.showAndWait();
+                    messageNotif("Information", "Successfully Deleted!");
                     availableCustomerShowListData();
                     clearContent();
                 } else return;
@@ -330,12 +290,36 @@ public class CustomerPaneController implements Initializable {
             }
         };
     }
-    //endregion
 
-    @FXML
-    void exit(MouseEvent event) {
+    private TextFormatter<String> textFormatter() {
+        // Create a UnaryOperator to filter the input
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String text = change.getText();
+            if (text.matches("[0-9]*")) {
+                return change; // Accept the change
+            }
+            return null; // Reject the change
+        };
 
+        TextFormatter<String> textFormat = new TextFormatter<>(filter);
+        return textFormat;
     }
+
+    private void messageNotif(String type, String message) {
+        Alert alert = new Alert(null);
+        if (type.equals("Error")) {
+            alert = new Alert(Alert.AlertType.ERROR);
+        } else if (type.equals("Confirmation")) {
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+        } else if (type.equals("Information")) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+        }
+        alert.setTitle(type + " Message");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    //endregion
 
     @FXML
     void redirect(MouseEvent event) {
@@ -375,11 +359,5 @@ public class CustomerPaneController implements Initializable {
                 e.printStackTrace();
             }
     }
-
-    @FXML
-    void select(MouseEvent event) {
-
-    }
-
 }
 
