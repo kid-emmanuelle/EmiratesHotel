@@ -81,6 +81,7 @@ HOME PAGE
 
 .table-view .table-column {
     -fx-alignment: center;
+    -fx-end-margin: 0px;
 }
 
 .table-view .column-header, filter {

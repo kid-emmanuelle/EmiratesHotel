@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -126,5 +132,120 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="294.0" layoutY="92.0" prefHeight="578.0" prefWidth="302.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="88.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="table-shadow" />
+         </styleClass>
+         <children>
+            <Label layoutX="32.0" layoutY="20.0" text="Employee Information" textFill="#cca2fc">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="employeeID" layoutX="115.0" layoutY="56.0" prefHeight="25.0" prefWidth="174.0" promptText="Don't need ID to Add" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="89.0" layoutY="60.0" text="ID:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="employeeName" layoutX="114.0" layoutY="96.0" prefHeight="25.0" prefWidth="174.0" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="66.0" layoutY="100.0" text="Name:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="employeeMail" layoutX="114.0" layoutY="135.0" prefHeight="25.0" prefWidth="174.0" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="76.0" layoutY="139.0" text="Mail:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="employeeAddress" layoutX="114.0" layoutY="173.0" prefHeight="25.0" prefWidth="174.0" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="55.0" layoutY="177.0" text="Address:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="employeeDOB" layoutX="114.0" layoutY="212.0" styleClass="txt-field-bg" stylesheets="@../css/home.css" />
+            <Label layoutX="28.0" layoutY="216.0" text="Date of birth:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="employeeContractDate" layoutX="114.0" layoutY="254.0" styleClass="txt-field-bg" stylesheets="@../css/home.css" />
+            <Label layoutX="21.0" layoutY="258.0" text="Contract Date:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="employeeRole" layoutX="114.0" layoutY="296.0" prefHeight="25.0" prefWidth="174.0" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="76.0" layoutY="300.0" text="Role:">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="employeeAddBtn" layoutX="32.0" layoutY="357.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Add">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+            <Button fx:id="employeeUpdateBtn" layoutX="167.0" layoutY="357.0" mnemonicParsing="false" onAction="#updateEmployee" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Update" />
+            <Button fx:id="employeeClearBtn" layoutX="32.0" layoutY="430.0" mnemonicParsing="false" onAction="#clearContent" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Clear" />
+            <Button fx:id="employeeDeleteBtn" layoutX="167.0" layoutY="430.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="47.0" prefWidth="103.0" styleClass="action-btn" stylesheets="@../css/home.css" text="Delete" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="626.0" layoutY="92.0" prefHeight="578.0" prefWidth="679.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="626.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="88.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="table-shadow" />
+         </styleClass>
+         <children>
+            <TextField fx:id="employeeSearch" layoutX="14.0" layoutY="15.0" onKeyTyped="#searchEmployee" prefHeight="35.0" prefWidth="325.0" promptText="Search" styleClass="txt-field-bg" stylesheets="@../css/home.css">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </TextField>
+            <TableView fx:id="employeeTableView" layoutX="14.0" layoutY="66.0" onMouseClicked="#availableEmployeeSelect" prefHeight="500.0" prefWidth="652.0" stylesheets="@../css/home.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="66.0">
+               <columns>
+                  <TableColumn fx:id="employeeCol_name" prefWidth="112.0" text="Name" />
+                  <TableColumn fx:id="employeeCol_id" prefWidth="55.0" text="ID" />
+                  <TableColumn fx:id="employeeCol_mail" prefWidth="162.0" text="Mail" />
+                  <TableColumn fx:id="employeeCol_role" minWidth="0.0" prefWidth="160.0" text="Role" />
+                  <TableColumn fx:id="employeeCol_contractDate" minWidth="0.0" prefWidth="162.0" text="Contract Start Date" />
+                  <TableColumn fx:id="employeeCol_address" minWidth="0.0" prefWidth="300.0" text="Address" />
+                  <TableColumn fx:id="employeeCol_dob" minWidth="0.0" prefWidth="285.0" text="Date Of Birth" />
+               </columns>
+            </TableView>
+            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="19.0" layoutY="19.0">
+               <image>
+                  <Image url="@../img/icons8-search-64.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
