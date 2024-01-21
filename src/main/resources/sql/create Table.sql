@@ -29,7 +29,7 @@ CREATE TABLE Room(
 
 CREATE TABLE FoodDish(
     DishID int PRIMARY KEY,
-    name VARCHAR(255),
+    dishName VARCHAR(255),
     dishType VARCHAR(255),
     description VARCHAR(255),
     price float
@@ -49,6 +49,7 @@ CREATE TABLE BookingRestaurant(
       bookingID int PRIMARY KEY,
       customer int,
       dish int,
+      quantity int,
       FOREIGN KEY(customer) REFERENCES Customer(PersonID),
       FOREIGN KEY(dish) REFERENCES FoodDish(DishID)
 );

@@ -161,7 +161,7 @@ public class DatabaseManager {
         while (resultset.next()){
             dishes.add(FoodDish.builder()
                     .id(resultset.getLong("DishID"))
-                    .name(resultset.getString("name"))
+                    .dishName(resultset.getString("dishName"))
                     .dishType(resultset.getString("dishType"))
                     .description(resultset.getString("description"))
                     .price(resultset.getFloat("price"))
@@ -237,7 +237,8 @@ public class DatabaseManager {
 
             FoodDish dish = FoodDish.builder()
                     .id(resultset.getLong("DishID"))
-                    .dishType(resultset.getString("type"))
+                    .dishName(resultset.getString("dishName"))
+                    .dishType(resultset.getString("dishType"))
                     .description(resultset.getString("description"))
                     .price(resultset.getFloat("price"))
                     .build();
@@ -247,6 +248,7 @@ public class DatabaseManager {
                     .id(resultset.getLong("bookingID"))
                     .customer(customer)
                     .dish(dish)
+                    .quantity(resultset.getInt("quantity"))
                     .build()
             );
         }
@@ -406,7 +408,21 @@ public class DatabaseManager {
             prepare.setString(3, String.valueOf(booking.getStart()));
             prepare.setString(4, String.valueOf(booking.getEnd()));
             prepare.setString(5, String.valueOf(booking.getRoomID()));
-            System.out.println(prepare);
+            prepare.executeUpdate();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static boolean addBookingRestaurant(BookingRestaurant booking) throws SQLException{
+        if (connection != null){
+            String addPersonquery = "INSERT INTO BookingRestaurant (bookingID, customer, dish, quantity) VALUES (?, ?, ?, ?)";
+            PreparedStatement prepare = connection.prepareStatement(addPersonquery);
+            prepare.setString(1, String.valueOf(booking.getId()));
+            prepare.setString(2, String.valueOf(booking.getCustomerID()));
+            prepare.setString(3, String.valueOf(booking.getFoodID()));
+            prepare.setString(4, String.valueOf(booking.getQuantity()));
             prepare.executeUpdate();
             return true;
         }else{

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,6 +25,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import fr.emirashotel.DatabaseManager;
+import fr.emirashotel.model.BookingRestaurant;
+import fr.emirashotel.model.BookingRoom;
 import fr.emirashotel.model.Customer;
 import fr.emirashotel.model.FoodDish;
 
@@ -72,21 +75,47 @@ public class RestaurantOrderPaneController implements Initializable {
     private TableColumn<FoodDish, String> foodType;
 
     @FXML
+    private TableColumn<BookingRestaurant, Integer> bookingCustomer;
+
+    @FXML
+    private TableColumn<BookingRestaurant, FoodDish> bookingDish;
+
+    @FXML
+    private TableColumn<BookingRestaurant, Float> bookingPrice;
+
+    @FXML
+    private TableColumn<BookingRestaurant, Integer> bookingQuantity;
+
+    @FXML
+    private TableView<BookingRestaurant> bookingTab;
+
+    @FXML
     private TextField searchCustomer;
 
     @FXML
     private TextField searchFood;
 
+    @FXML
+    private TextField searchBooking;
+
+    @FXML
+    private TextField quantity;
+
+    @FXML 
+    private Button buttonAddOrder;
+
     ObservableList<Customer> customers;
     Customer customerSelect;
     ObservableList<FoodDish> foods;
     FoodDish foodSelect;
+    ObservableList<BookingRestaurant> bookings;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buttonRestaurantOrder.setStyle("-fx-background-color: #c1f3e1;");
         updateCustomer();
         updateFood();
+        updateBooking();
         customerTab.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 customerSelect = newSelection;
@@ -138,6 +167,42 @@ public class RestaurantOrderPaneController implements Initializable {
             }
     }
 
+    @FXML
+    void addOrder(MouseEvent event) throws SQLException {
+        if (customerSelect != null && foodSelect != null){
+            Integer quant;
+            try {
+                quant = Integer.parseInt(quantity.getText());
+            } catch (NumberFormatException e) {
+                error("Type a number");
+                return;
+            }
+            if (quantity.getText() != null && quant<20){
+                createOrder(customerSelect, foodSelect, quant);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Confirmation Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Your command for "+ quant+" " +foodSelect.getDishName() + " has been confirmed");
+                alert.showAndWait();
+            }else{
+                error("Type a quantity between 1 and 20");
+            }
+        }else{
+            error("Select a customer and a dish before submit");
+        }
+    }
+
+    
+    private void createOrder(Customer customer, FoodDish food, Integer quantity) throws SQLException {
+        long id = DatabaseManager.getNumberOfRows("bookingrestaurant")+10;
+        BookingRestaurant booking = new BookingRestaurant(id, customer, food, quantity);
+        if (DatabaseManager.addBookingRestaurant(booking)){
+            updateBooking();
+        }else{
+            error("Erreur Interne");
+        }
+    }
+
     public void updateCustomer(){
         customers = FXCollections.observableArrayList();
         try {
@@ -180,7 +245,7 @@ public class RestaurantOrderPaneController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        foodName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        foodName.setCellValueFactory(new PropertyValueFactory<>("dishName"));
         foodType.setCellValueFactory(new PropertyValueFactory<>("dishType"));
         foodPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
@@ -208,6 +273,53 @@ public class RestaurantOrderPaneController implements Initializable {
             foodFilter.addAll(filter);
             foodTab.setItems(foodFilter);
         });
+    }
+
+    public void updateBooking(){
+        bookings = FXCollections.observableArrayList();
+        try {
+            bookings.addAll(DatabaseManager.bookingDishes());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        bookingCustomer.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        bookingDish.setCellValueFactory(new PropertyValueFactory<>("foodName"));
+        bookingQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        bookingPrice.setCellValueFactory(new PropertyValueFactory<>("foodPrice"));
+
+        bookingTab.setItems(bookings);
+    }
+
+    public void searchBooking() {
+        FilteredList<BookingRestaurant> filter = new FilteredList<>(bookings, e->true);
+
+        searchBooking.textProperty().addListener((Observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateBookingData -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String searchKey = newValue.toLowerCase();
+                if (predicateBookingData.getFoodName().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if(String.valueOf(predicateBookingData.getCustomerID()).contains(searchKey)){
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            ObservableList<BookingRestaurant> bookingFilter = FXCollections.observableArrayList();
+            bookingFilter.addAll(filter);
+            bookingTab.setItems(bookingFilter);
+        });
+    }
+
+    public void error(String text){
+        Alert alert;
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Message");
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 
 }

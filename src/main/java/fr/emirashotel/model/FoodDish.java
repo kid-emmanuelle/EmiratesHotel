@@ -9,7 +9,7 @@ public class FoodDish {
 
     private Long id;
 
-    private String name;
+    private String dishName;
 
     private String dishType;
 
@@ -20,14 +20,14 @@ public class FoodDish {
     @Builder
     public FoodDish(long id, String name, String dishType, String description, float price){
         this.id = id;
-        this.name = name;
+        this.dishName = name;
         this.dishType = dishType;
         this.description = description;
         this.price = price;
     }
 
     public String getName(){
-        return this.name;
+        return this.dishName;
     }
 
     public String getType(){
