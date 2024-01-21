@@ -19,14 +19,45 @@ public class BookingRoom extends Booking{
 
     private Room room;
 
+    // Données de test, pas des attributs, ne pas supprimer
+    private long customerID;
+    private Integer roomNumber;
+    private long roomID;
+
     @Builder
-    public BookingRoom(Long id, Customer customer, Date start, Date end, Room room/*, Order order*/) {
+    public BookingRoom(Long id, Customer customer, Date start, Date end, Room room) {
         super(id, customer);
         this.start = start;
         this.end = end;
         this.room = room;
-//        this.order = order;
+
+        // Pareil
+        this.customerID = customer.getId();
+        this.roomNumber = room.getNumber();
+        this.roomID = room.getId();
     }
+
+    public Integer getRoomNumber(){
+        return this.roomNumber;
+    }
+
+    public long getRoomID(){
+        return this.roomID;
+    }
+
+    public long getCustomerID(){
+        return this.customerID;
+    }
+
+    public Date getStart(){
+        return this.start;
+    }
+
+    public Date getEnd(){
+        return this.end;
+    }
+
+    
 /*
     public ArrayList<Room> getRooms(){
         if(this.rooms == null){

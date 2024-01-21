@@ -339,4 +339,21 @@ public class DatabaseManager {
         }
         return false;
     }
+
+    public static boolean addBookingRoom(BookingRoom booking) throws SQLException{
+        if (connection != null){
+            String addPersonquery = "INSERT INTO BookingRoom (bookingID, customer, start, end, room) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement prepare = connection.prepareStatement(addPersonquery);
+            prepare.setString(1, String.valueOf(booking.getId()));
+            prepare.setString(2, String.valueOf(booking.getCustomerID()));
+            prepare.setString(3, String.valueOf(booking.getStart()));
+            prepare.setString(4, String.valueOf(booking.getEnd()));
+            prepare.setString(5, String.valueOf(booking.getRoomID()));
+            System.out.println(prepare);
+            prepare.executeUpdate();
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
