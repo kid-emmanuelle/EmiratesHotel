@@ -2,16 +2,20 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="701.0" prefWidth="1333.0" style="-fx-background-color: #fff;" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.emirashotel.controller.OverviewPaneController">
    <children>
@@ -130,46 +134,46 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <HBox layoutX="294.0" layoutY="82.0" prefHeight="113.0" prefWidth="753.0" stylesheets="@../css/home.css">
+      <HBox alignment="CENTER_LEFT" layoutX="294.0" layoutY="82.0" prefHeight="113.0" prefWidth="753.0" spacing="80.0" stylesheets="@../css/home.css">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="22000" textFill="#2a73ff">
+                  <Label fx:id="totalHotelOrders" text="2207" textFill="#2a73ff">
                      <font>
-                        <Font size="26.0" />
+                        <Font name="Segoe UI Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="10.0" text="Total Orders" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Total Hotel Orders" />
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="22000" textFill="#26bfbc">
+                  <Label fx:id="totalRestoOrders" text="1057" textFill="#26bfbc">
                      <font>
-                        <Font size="26.0" />
+                        <Font name="Segoe UI Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Total delivered" />
+                  <Label text="Total Resto Orders" />
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="354.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="22000" textFill="#fa5f7e">
+                  <Label fx:id="totalCustomers" text="576" textFill="#fa5f7e">
                      <font>
-                        <Font size="26.0" />
+                        <Font name="Segoe UI Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Pending Orders" />
+                  <Label text="Total Customers" />
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="454.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="22000" textFill="#de0000">
+                  <Label fx:id="totalIncome" text="780k $" textFill="#de0000">
                      <font>
-                        <Font size="26.0" />
+                        <Font name="Segoe UI Bold" size="26.0" />
                      </font>
                   </Label>
-                  <Label text="Orders on Hold" />
+                  <Label text="Total Income" />
                </children>
             </VBox>
          </children>
@@ -177,12 +181,80 @@
             <String fx:value="blue-bg" />
             <String fx:value="shadow" />
          </styleClass>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
       </HBox>
-      <TableView layoutX="294.0" layoutY="220.0" prefHeight="460.0" prefWidth="753.0" styleClass="table-view-bg" stylesheets="@../css/home.css">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <AnchorPane layoutX="294.0" layoutY="214.0" prefHeight="466.0" prefWidth="468.0" stylesheets="@../css/home.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <BarChart fx:id="incomeChart" prefHeight="466.0" prefWidth="500.0" title="Income Data Chart">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="836.0" layoutY="214.0" prefHeight="216.0" prefWidth="461.0" stylesheets="@../css/home.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <BarChart fx:id="hotelOrderChart" layoutY="-2.0" prefHeight="216.0" prefWidth="461.0" title="Hotel Orders Chart">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="836.0" layoutY="464.0" prefHeight="216.0" prefWidth="461.0" stylesheets="@../css/home.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <BarChart fx:id="restoOrderChart" layoutY="-2.0" prefHeight="216.0" prefWidth="461.0" title="Restaurant Orders Chart">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="1084.0" layoutY="82.0" prefHeight="113.0" prefWidth="213.0" stylesheets="@../css/home.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Text fontSmoothingType="LCD" layoutX="20.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO ADMIN DASHBOARD" textAlignment="CENTER" wrappingWidth="172.9999982714653">
+               <font>
+                  <Font name="Segoe UI Bold" size="22.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#c394f8" />
+                        <Stop color="#c394f8" offset="0.007662835249042145" />
+                        <Stop color="#3ceccb" offset="0.739463601532567" />
+                        <Stop color="#3ceccb" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
