@@ -74,7 +74,7 @@ public class PaneController {
                 window.setResizable(true);
                 window.show();
             } catch ( IOException e) {
-                
+                e.printStackTrace();
             }
     }
 
