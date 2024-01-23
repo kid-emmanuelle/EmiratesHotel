@@ -16,7 +16,7 @@ public class SQLConfig {
     private String username;
     private String password;
 
-    public void save(String file) throws IOException {
+    public void save() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
 

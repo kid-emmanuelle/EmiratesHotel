@@ -113,7 +113,7 @@ public class SettingsPaneController implements Initializable {
         DatabaseManager.getSqlConfig().setUsername(user_field.getText());
         DatabaseManager.getSqlConfig().setPassword(password_field.getText());
         try {
-            DatabaseManager.getSqlConfig().save("/sql/config.json");
+            DatabaseManager.getSqlConfig().save();
             DatabaseManager.destroy();
             DatabaseManager.create(DatabaseManager.getSqlConfig());
         } catch (ClassNotFoundException e) {
