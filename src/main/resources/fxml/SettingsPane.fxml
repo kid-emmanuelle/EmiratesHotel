@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -126,5 +127,16 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="324.0" layoutY="144.0" prefHeight="311.0" prefWidth="940.0">
+         <children>
+            <TextField id="url_field" fx:id="url_field" layoutX="117.0" layoutY="38.0" prefHeight="31.0" prefWidth="744.0" styleClass="txt-field-bg" stylesheets="@../css/home.css" />
+            <Label layoutX="32.0" layoutY="43.0" stylesheets="@../css/home.css" text="url: " />
+            <Label layoutX="32.0" layoutY="83.0" stylesheets="@../css/home.css" text="username:" />
+            <Label layoutX="32.0" layoutY="125.0" stylesheets="@../css/home.css" text="password:" />
+            <TextField id="user_field" fx:id="user_field" layoutX="118.0" layoutY="78.0" prefHeight="31.0" prefWidth="744.0" styleClass="txt-field-bg" stylesheets="@../css/home.css" />
+            <TextField id="password_field" fx:id="password_field" layoutX="119.0" layoutY="120.0" prefHeight="31.0" prefWidth="744.0" styleClass="txt-field-bg" stylesheets="@../css/home.css" />
+            <Button id="save" fx:id="save" layoutX="782.0" layoutY="176.0" mnemonicParsing="false" onAction="#onClick" styleClass="action-btn" stylesheets="@../css/home.css" text="Save" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

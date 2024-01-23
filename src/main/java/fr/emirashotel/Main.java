@@ -1,10 +1,18 @@
 package fr.emirashotel;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.emirashotel.model.Employee;
+import fr.emirashotel.model.SQLConfig;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,9 +26,13 @@ import javafx.stage.Stage;
 
 public class Main  extends Application{
 
-    public static void main(String [] args) throws SQLException {
+    public static void main(String [] args) {
         try {
-            DatabaseManager.create();
+            ObjectMapper objectMapper = new ObjectMapper();
+            InputStream inputStream = Main.class.getResourceAsStream("/sql/config.json");
+
+            SQLConfig sqlConfig = SQLConfig.fromJson(objectMapper.readTree(inputStream));
+            DatabaseManager.create(sqlConfig);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             System.err.println("Erreur : le pilote JDBC n'a pas pu être chargé.");
@@ -29,12 +41,17 @@ public class Main  extends Application{
             e.printStackTrace();
             System.err.println("Erreur : la connexion à la base de données a échoué.");
             return;
+        }catch (Exception e){
+            e.printStackTrace();
+            System.err.println("Erreur : dans l'ouverture du fichier de config.");
+            return;
         }
         launch(args);
     }
 
     @Override
     public void start(Stage window)  {
+
         AnchorPane root = new AnchorPane();
         // Size 
         window.setMaximized(true);
@@ -85,5 +102,4 @@ public class Main  extends Application{
         window.show();
     }
 
-    
 }

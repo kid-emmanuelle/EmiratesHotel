@@ -15,21 +15,21 @@ public class DatabaseManager {
 
     private static Connection connection;
 
-    private static final String url = "jdbc:mysql://localhost/emirates";
-    private static final String user = "root";
+    @Getter
+    private static SQLConfig sqlConfig;
 
-    private static final String password = "";
-
-
-    public static void create() throws SQLException, ClassNotFoundException{
+    public static void create(SQLConfig sqlConfig) throws SQLException, ClassNotFoundException{
         if(connection != null) return;
+        DatabaseManager.sqlConfig = sqlConfig;
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection(url, user, password);
+        System.out.println(sqlConfig.getUsername());
+        connection = DriverManager.getConnection(sqlConfig.getUrl(), sqlConfig.getUsername(), sqlConfig.getPassword());
     }
 
     public static void destroy() throws SQLException {
         if(connection == null) return;
         connection.close();
+        connection = null;
     }
 
     public static ArrayList<Employee> getEmployees() throws SQLException {

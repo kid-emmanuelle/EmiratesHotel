@@ -4,9 +4,11 @@ module fr.emirashotel {
     requires static lombok;
     requires java.sql;
     requires mysql.connector.java;
+    requires com.fasterxml.jackson.databind;
 
 
     exports fr.emirashotel;
+    exports fr.emirashotel.model;
     opens fr.emirashotel.controller;
     opens fr.emirashotel.model to javafx.base;
     
