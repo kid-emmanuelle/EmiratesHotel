@@ -207,13 +207,17 @@
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <BarChart fx:id="hotelOrderChart" layoutY="-2.0" prefHeight="216.0" prefWidth="461.0" title="Hotel Orders Chart">
+            <BarChart fx:id="hotelOrderChart" layoutY="-2.0" prefHeight="216.0" prefWidth="461.0" stylesheets="@../css/home.css" title="Hotel Orders Chart">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
               <yAxis>
                 <NumberAxis side="LEFT" />
               </yAxis>
+               <styleClass>
+                  <String fx:value="series0-bar1" />
+                  <String fx:value="default-color0" />
+               </styleClass>
             </BarChart>
          </children>
       </AnchorPane>

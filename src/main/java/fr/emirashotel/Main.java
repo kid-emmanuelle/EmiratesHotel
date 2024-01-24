@@ -15,12 +15,14 @@ import fr.emirashotel.model.Employee;
 import fr.emirashotel.model.SQLConfig;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -73,14 +75,32 @@ public class Main  extends Application{
         ImageView logo = new ImageView(image);
         logo.setFitWidth(image.getHeight()*1.35);
         logo.setFitHeight(image.getHeight()*1.35);
-        logo.setLayoutX(0.39*width);
+        AnchorPane.setLeftAnchor(logo, (width - logo.getFitWidth()) / 2);
         logo.setLayoutY(0.05*height);
 
         // Buttons
         Button load = new Button("Connexion");
         load.setMinSize(width*0.2, height*0.1);
-        load.setLayoutX(width*0.39);
+        AnchorPane.setLeftAnchor(load, (width - load.getMinWidth()) / 2);
         load.setLayoutY(height*0.55);
+        load.setStyle(
+                "-fx-background-radius: 10px; " +
+                        "-fx-border-width: 4px; " +
+                        "-fx-cursor: hand; " +
+                        "-fx-base: #ee2211; " +
+                        "-fx-padding: 8 15 15 15; " +
+                        "-fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0; " +
+                        "-fx-background-color: " +
+                        "linear-gradient(from 0% 93% to 0% 100%, #6dc9bb 0%, #44b6a5 100%), " +
+                        "#8ae3d5, " +
+                        "#a7e3da, " +
+                        "radial-gradient(center 50% 50%, radius 100%, #afece2, #8deedf); " +
+                        "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 ); " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-size: 1.1em; " +
+                        "-fx-cursor: hand; " +
+                        "-fx-text-fill: #ffffff; "
+        );
         // Button click event
         load.setOnAction(event -> {
             try {
