@@ -53,7 +53,6 @@ public class Main  extends Application{
 
     @Override
     public void start(Stage window)  {
-
         AnchorPane root = new AnchorPane();
         // Size 
         window.setMaximized(true);
@@ -117,6 +116,7 @@ public class Main  extends Application{
         root.getChildren().add(load);
         root.getChildren().add(logo);
         window.setTitle("Emirates Hotel");
+        window.getIcons().add(new Image(getClass().getResourceAsStream("/img/Emirates_Hotel.png")));
         window.sizeToScene();
         window.centerOnScreen();
         window.show();
