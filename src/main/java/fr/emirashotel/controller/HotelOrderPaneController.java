@@ -184,7 +184,7 @@ public class HotelOrderPaneController implements Initializable {
             if (startDate.getValue() != null && endDate.getValue() != null){
                 Date start = Date.valueOf(startDate.getValue());
                 Date end = Date.valueOf(endDate.getValue());
-                if (startDate.getValue().compareTo(endDate.getValue()) < 0){
+                if (startDate.getValue().compareTo(endDate.getValue()) <= 0){
                     boolean verif = true;
                     long num=0;
                     for (BookingRoom booking :bookings){
@@ -201,7 +201,7 @@ public class HotelOrderPaneController implements Initializable {
                         alert.setContentText("Your reservation for the room n° " +roomSelect.getNumber() + " has been confirmed");
                         alert.showAndWait();
                     }else{
-                        error("This room is already reserve by the client n° "+num+"");
+                        error("This room is already reserved by the client n° "+num+"");
                     }
                 }else{
                     error("The dates must be valid");

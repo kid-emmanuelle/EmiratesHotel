@@ -220,8 +220,8 @@
                 <TableColumn fx:id="customerCol_mail" prefWidth="187.0" text="Mail" />
                   <TableColumn fx:id="customerCol_address" minWidth="0.0" prefWidth="145.0" text="Address" />
                   <TableColumn fx:id="customerCol_joinDate" minWidth="0.0" prefWidth="125.0" text="Joining Date" />
-                  <TableColumn minWidth="0.0" prefWidth="300.0" />
-                  <TableColumn minWidth="0.0" prefWidth="285.0" />
+                  <TableColumn fx:id="customerCol_dob" minWidth="0.0" prefWidth="300.0" text="Date of Birth" />
+                  <TableColumn minWidth="0.0" prefWidth="285.0" text="Notes" />
               </columns>
             </TableView>
             <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="19.0" layoutY="19.0">

@@ -104,6 +104,9 @@ public class CustomerPaneController implements Initializable {
     @FXML
     private TableColumn<Customer, Date> customerCol_joinDate;
 
+    @FXML
+    private TableColumn<Customer, Date> customerCol_dob;
+
     ObservableList<Customer> customers;
 
     @Override
@@ -129,6 +132,7 @@ public class CustomerPaneController implements Initializable {
         customerCol_mail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         customerCol_address.setCellValueFactory(new PropertyValueFactory<>("address"));
         customerCol_joinDate.setCellValueFactory(new PropertyValueFactory<>("joiningDate"));
+        customerCol_dob.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
 
         customerTableView.setItems(customers);
     }

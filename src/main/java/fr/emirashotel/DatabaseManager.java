@@ -217,6 +217,55 @@ public class DatabaseManager {
         return bookingRooms;
     }
 
+    public static ArrayList<BookingRoom> bookingRooms(java.sql.Date dateBooking) throws SQLException {
+        if(connection == null) return null;
+        String requete = "SELECT * FROM bookingroom JOIN customer C On (C.PersonID = customer) " +
+                                                    "JOIN person P USING (PersonID) " +
+                                                    "JOIN room R ON (R.RoomID = room) " +
+                         "WHERE ? BETWEEN bookingroom.start AND bookingroom.end";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(requete);
+        preparedStatement.setDate(1, dateBooking);
+
+        ResultSet resultset = preparedStatement.executeQuery();
+        ArrayList<BookingRoom> bookingRooms = new ArrayList<>();
+
+        while (resultset.next()){
+            Customer customer = Customer.builder()
+                    .id(resultset.getLong("personID"))
+                    .name(resultset.getString("name"))
+                    .mail(resultset.getString("mail"))
+                    .dateOfBirth(resultset.getDate("dateOfBirth"))
+                    .address(resultset.getString("address"))
+                    .joiningDate(resultset.getDate("joiningDate"))
+                    .build();
+
+            RoomType roomType = RoomType.Double;
+            try {
+                roomType = RoomType.valueOf(resultset.getString("type"));
+            }catch (NoSuchElementException e){
+                System.err.println("Erreur : Impossible de trouver le type:"+resultset.getString("type"));
+            }
+            Room room = Room.builder()
+                    .id(resultset.getLong("RoomID"))
+                    .type(roomType)
+                    .number(resultset.getInt("number"))
+                    .price(resultset.getFloat("price"))
+                    .build();
+
+            bookingRooms.add(BookingRoom.builder()
+                    .id(resultset.getLong("bookingID"))
+                    .start(resultset.getDate("start"))
+                    .end(resultset.getDate("end"))
+                    .customer(customer)
+                    .room(room)
+                    .build()
+            );
+        }
+        resultset.close();
+        preparedStatement.close();
+        return bookingRooms;
+    }
 
     public static ArrayList<BookingRestaurant> bookingDishes() throws SQLException {
         if(connection == null) return null;

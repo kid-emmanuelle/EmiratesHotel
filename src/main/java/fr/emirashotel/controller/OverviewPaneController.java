@@ -3,6 +3,8 @@ package fr.emirashotel.controller;
 import java.io.IOException;
 
 import fr.emirashotel.DatabaseManager;
+import fr.emirashotel.model.BookingRestaurant;
+import fr.emirashotel.model.BookingRoom;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +17,13 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
+import lombok.Data;
+
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class OverviewPaneController implements Initializable {
@@ -68,7 +75,11 @@ public class OverviewPaneController implements Initializable {
         displayTotalCustomers();
         displayTotalIncome();
         setDataIncome();
-        setHotelOrderData();
+        try {
+            setHotelOrderData();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         setRestoOrderData();
     }
 
@@ -97,9 +108,33 @@ public class OverviewPaneController implements Initializable {
     }
 
     private void displayTotalIncome() {
-        int hotelOrders = Integer.parseInt(totalHotelOrders.getText());
-        int restoOrders = Integer.parseInt(totalRestoOrders.getText());
-        totalIncome.setText(String.valueOf((hotelOrders + restoOrders) * 55) + " $");
+        try {
+            ArrayList<BookingRoom> bookingRooms = DatabaseManager.bookingRooms();
+            ArrayList<BookingRestaurant> bookingRestaurants = DatabaseManager.bookingDishes();
+            float totalBookingRoomPrice = 0, totalBookingRestaurantPrice = 0;
+            for (BookingRoom bookingRoom : bookingRooms) {
+                totalBookingRoomPrice += bookingRoom.getRoom().getPrice();
+            }
+            for (BookingRestaurant bookingRestaurant : bookingRestaurants) {
+                totalBookingRestaurantPrice += (bookingRestaurant.getFoodPrice() * bookingRestaurant.getQuantity());
+            }
+            totalIncome.setText(((int)(totalBookingRoomPrice + totalBookingRestaurantPrice)) + " $");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private float totalIncomePerDay(Date currentDate) {
+        try {
+            ArrayList<BookingRoom> bookingRooms = DatabaseManager.bookingRooms(currentDate);
+            float totalIncome = 0.0f;
+            for (BookingRoom bookingRoom : bookingRooms) {
+                totalIncome += bookingRoom.getRoom().getPrice();
+            }
+            return totalIncome;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setDataIncome() {
@@ -108,31 +143,31 @@ public class OverviewPaneController implements Initializable {
         // Creating a series
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Income per Day");
+        LocalDate currentDate = LocalDate.now();
 
         // Adding data points to the series
-        series.getData().add(new XYChart.Data<>("Monday", 100));
-        series.getData().add(new XYChart.Data<>("Tuesday", 150));
-        series.getData().add(new XYChart.Data<>("Wednesday", 200));
-        series.getData().add(new XYChart.Data<>("Thursday", 180));
-        series.getData().add(new XYChart.Data<>("Friday", 220));
-
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(4)).toString(), totalIncomePerDay(Date.valueOf(currentDate.minusDays(4)))));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(3)).toString(), totalIncomePerDay(Date.valueOf(currentDate.minusDays(3)))));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(2)).toString(), totalIncomePerDay(Date.valueOf(currentDate.minusDays(2)))));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(1)).toString(), totalIncomePerDay(Date.valueOf(currentDate.minusDays(1)))));
+        series.getData().add(new XYChart.Data<>(currentDate.toString(), totalIncomePerDay(Date.valueOf(currentDate))));
         // Adding the series to the existing chart
         incomeChart.getData().add(series);
     }
 
-    private void setHotelOrderData() {
+    private void setHotelOrderData() throws SQLException {
         hotelOrderChart.setBarGap(5);
         hotelOrderChart.setCategoryGap(35);
         // Creating a series
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Total Hotel Orders per Day");
-
+        LocalDate currentDate = LocalDate.now();
         // Adding data points to the series
-        series.getData().add(new XYChart.Data<>("Monday", 30));
-        series.getData().add(new XYChart.Data<>("Tuesday", 45));
-        series.getData().add(new XYChart.Data<>("Wednesday", 20));
-        series.getData().add(new XYChart.Data<>("Thursday", 60));
-        series.getData().add(new XYChart.Data<>("Friday", 50));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(4)).toString(), DatabaseManager.bookingRooms(Date.valueOf(currentDate.minusDays(4))).size()));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(3)).toString(), DatabaseManager.bookingRooms(Date.valueOf(currentDate.minusDays(3))).size()));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(2)).toString(), DatabaseManager.bookingRooms(Date.valueOf(currentDate.minusDays(2))).size()));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(1)).toString(), DatabaseManager.bookingRooms(Date.valueOf(currentDate.minusDays(1))).size()));
+        series.getData().add(new XYChart.Data<>(currentDate.toString(), DatabaseManager.bookingRooms(Date.valueOf(currentDate)).size()));
 
         // Apply the style to each Data object in the series
         for (XYChart.Data<String, Number> data : series.getData()) {
@@ -154,13 +189,17 @@ public class OverviewPaneController implements Initializable {
         // Creating a series
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Total Restaurant Orders per Day");
-
+        LocalDate currentDate = LocalDate.now();
         // Adding data points to the series
-        series.getData().add(new XYChart.Data<>("Monday", 10));
-        series.getData().add(new XYChart.Data<>("Tuesday", 17));
-        series.getData().add(new XYChart.Data<>("Wednesday", 27));
-        series.getData().add(new XYChart.Data<>("Thursday", 19));
-        series.getData().add(new XYChart.Data<>("Friday", 32));
+        /* Because the 'BookingRestaurant' table does not have a dateBooking attribute,
+           it is not possible to get exact data, just a simulation.
+           To know how to get exact data, view the function setHotelOrderData or setDataIncome
+         */
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(4)).toString(), 10));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(3)).toString(), 17));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(2)).toString(), 27));
+        series.getData().add(new XYChart.Data<>((currentDate.minusDays(1)).toString(), 19));
+        series.getData().add(new XYChart.Data<>(currentDate.toString(), 32));
 
         // Apply the style to each Data object in the series
         for (XYChart.Data<String, Number> data : series.getData()) {
